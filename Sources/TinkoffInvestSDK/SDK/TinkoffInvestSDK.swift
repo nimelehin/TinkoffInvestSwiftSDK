@@ -15,7 +15,7 @@ public class TinkoffInvestSDK {
 
     // MARK: - Initialization
 
-    public init(appName: String = "JohnReeze.TinkoffInvestSwiftSDK",
+    public init(appName: String = "GoldenBrazier",
                 tokenProvider: TinkoffInvestTokenProvider,
                 sandbox sandboxTokenProvider: TinkoffInvestTokenProvider) {
         self.appName = appName
@@ -36,6 +36,8 @@ public class TinkoffInvestSDK {
     public lazy var marketDataServiceStream: MarketDataStreamService = GRPCMarketDataStreamService(tokenProvider: commonTokenProvider, appName: appName)
 
     public lazy var stopOrdersService: StopOrdersService = GRPCStopOrdersService(tokenProvider: commonTokenProvider, appName: appName)
+
+    public lazy var ordersService: OrdersService = GRPCOrdersService(tokenProvider: commonTokenProvider, appName: appName)
 
     public lazy var sandboxService: SandboxService = GRPCSandboxService(tokenProvider: sandboxTokenProvider, appName: appName)
 }
