@@ -195,6 +195,9 @@ public struct TradesStreamRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
+  ///Идентификаторы счетов.
+  public var accounts: [String] = []
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -263,10 +266,10 @@ public struct OrderTrades {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  ///Идентификатор торгового поручения
+  ///Идентификатор торгового поручения.
   public var orderID: String = String()
 
-  ///Дата и время создания сообщения
+  ///Дата и время создания сообщения в часовом поясе UTC.
   public var createdAt: SwiftProtobuf.Google_Protobuf_Timestamp {
     get {return _createdAt ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_createdAt = newValue}
@@ -276,14 +279,17 @@ public struct OrderTrades {
   /// Clears the value of `createdAt`. Subsequent reads from it will return its default value.
   public mutating func clearCreatedAt() {self._createdAt = nil}
 
-  ///Направление сделки (возможные значения)
+  ///Направление сделки.
   public var direction: OrderDirection = .unspecified
 
-  ///Figi-идентификатор инструмента
+  ///Figi-идентификатор инструмента.
   public var figi: String = String()
 
-  ///Массив сделок
+  ///Массив сделок.
   public var trades: [OrderTrade] = []
+
+  ///Идентификатор счёта.
+  public var accountID: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -298,7 +304,7 @@ public struct OrderTrade {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  ///Дата и время совершения сделки по времени биржи
+  ///Дата и время совершения сделки в часовом поясе UTC.
   public var dateTime: SwiftProtobuf.Google_Protobuf_Timestamp {
     get {return _dateTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_dateTime = newValue}
@@ -308,7 +314,7 @@ public struct OrderTrade {
   /// Clears the value of `dateTime`. Subsequent reads from it will return its default value.
   public mutating func clearDateTime() {self._dateTime = nil}
 
-  ///Цена, по которой совершена сделка
+  ///Цена одного инструмента, по которой совершена сделка.
   public var price: Quotation {
     get {return _price ?? Quotation()}
     set {_price = newValue}
@@ -318,7 +324,7 @@ public struct OrderTrade {
   /// Clears the value of `price`. Subsequent reads from it will return its default value.
   public mutating func clearPrice() {self._price = nil}
 
-  ///Количество лотов в сделке
+  ///Количество лотов в сделке.
   public var quantity: Int64 = 0
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -341,7 +347,7 @@ public struct PostOrderRequest {
   ///Количество лотов.
   public var quantity: Int64 = 0
 
-  ///Цена лота.
+  ///Цена одного инструмента. Для получения стоимости лота требуется умножить на лотность инструмента.
   public var price: Quotation {
     get {return _price ?? Quotation()}
     set {_price = newValue}
@@ -472,7 +478,7 @@ public struct PostOrderResponse {
     set {_uniqueStorage()._direction = newValue}
   }
 
-  ///Начальная цена инструмента заявки.
+  ///Начальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.
   public var initialSecurityPrice: MoneyValue {
     get {return _storage._initialSecurityPrice ?? MoneyValue()}
     set {_uniqueStorage()._initialSecurityPrice = newValue}
@@ -698,7 +704,7 @@ public struct OrderState {
     set {_uniqueStorage()._direction = newValue}
   }
 
-  ///Начальная цена инструмента. Цена инструмента на момент выставления заявки.
+  ///Начальная цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента.
   public var initialSecurityPrice: MoneyValue {
     get {return _storage._initialSecurityPrice ?? MoneyValue()}
     set {_uniqueStorage()._initialSecurityPrice = newValue}
@@ -759,7 +765,7 @@ public struct OrderStage {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  ///Цена.
+  ///Цена за 1 инструмент. Для получения стоимости лота требуется умножить на лотность инструмента..
   public var price: MoneyValue {
     get {return _price ?? MoneyValue()}
     set {_price = newValue}
@@ -815,18 +821,31 @@ extension OrderExecutionReportStatus: SwiftProtobuf._ProtoNameProviding {
 
 extension TradesStreamRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".TradesStreamRequest"
-  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "accounts"),
+  ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let _ = try decoder.nextFieldNumber() {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedStringField(value: &self.accounts) }()
+      default: break
+      }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.accounts.isEmpty {
+      try visitor.visitRepeatedStringField(value: self.accounts, fieldNumber: 1)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: TradesStreamRequest, rhs: TradesStreamRequest) -> Bool {
+    if lhs.accounts != rhs.accounts {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -910,6 +929,7 @@ extension OrderTrades: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
     3: .same(proto: "direction"),
     4: .same(proto: "figi"),
     5: .same(proto: "trades"),
+    6: .standard(proto: "account_id"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -923,6 +943,7 @@ extension OrderTrades: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
       case 3: try { try decoder.decodeSingularEnumField(value: &self.direction) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.figi) }()
       case 5: try { try decoder.decodeRepeatedMessageField(value: &self.trades) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.accountID) }()
       default: break
       }
     }
@@ -948,6 +969,9 @@ extension OrderTrades: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
     if !self.trades.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.trades, fieldNumber: 5)
     }
+    if !self.accountID.isEmpty {
+      try visitor.visitSingularStringField(value: self.accountID, fieldNumber: 6)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -957,6 +981,7 @@ extension OrderTrades: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementati
     if lhs.direction != rhs.direction {return false}
     if lhs.figi != rhs.figi {return false}
     if lhs.trades != rhs.trades {return false}
+    if lhs.accountID != rhs.accountID {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

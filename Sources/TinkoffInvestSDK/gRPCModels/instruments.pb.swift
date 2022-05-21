@@ -20,6 +20,87 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
+///Тип купонов.
+public enum CouponType: SwiftProtobuf.Enum {
+  public typealias RawValue = Int
+
+  ///Неопределенное значение
+  case unspecified // = 0
+
+  ///Постоянный
+  case constant // = 1
+
+  ///Плавающий
+  case floating // = 2
+
+  ///Дисконт
+  case discount // = 3
+
+  ///Ипотечный
+  case mortgage // = 4
+
+  ///Фиксированный
+  case fix // = 5
+
+  ///Переменный
+  case variable // = 6
+
+  ///Прочее
+  case other // = 7
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unspecified
+    case 1: self = .constant
+    case 2: self = .floating
+    case 3: self = .discount
+    case 4: self = .mortgage
+    case 5: self = .fix
+    case 6: self = .variable
+    case 7: self = .other
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unspecified: return 0
+    case .constant: return 1
+    case .floating: return 2
+    case .discount: return 3
+    case .mortgage: return 4
+    case .fix: return 5
+    case .variable: return 6
+    case .other: return 7
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+}
+
+#if swift(>=4.2)
+
+extension CouponType: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static var allCases: [CouponType] = [
+    .unspecified,
+    .constant,
+    .floating,
+    .discount,
+    .mortgage,
+    .fix,
+    .variable,
+    .other,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
 ///Тип идентификатора инструмента. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)
 public enum InstrumentIdType: SwiftProtobuf.Enum {
   public typealias RawValue = Int
@@ -32,6 +113,9 @@ public enum InstrumentIdType: SwiftProtobuf.Enum {
 
   ///Ticker.
   case ticker // = 2
+
+  ///Уникальный идентификатор.
+  case uid // = 3
   case UNRECOGNIZED(Int)
 
   public init() {
@@ -43,6 +127,7 @@ public enum InstrumentIdType: SwiftProtobuf.Enum {
     case 0: self = .instrumentIDUnspecified
     case 1: self = .figi
     case 2: self = .ticker
+    case 3: self = .uid
     default: self = .UNRECOGNIZED(rawValue)
     }
   }
@@ -52,6 +137,7 @@ public enum InstrumentIdType: SwiftProtobuf.Enum {
     case .instrumentIDUnspecified: return 0
     case .figi: return 1
     case .ticker: return 2
+    case .uid: return 3
     case .UNRECOGNIZED(let i): return i
     }
   }
@@ -66,6 +152,7 @@ extension InstrumentIdType: CaseIterable {
     .instrumentIDUnspecified,
     .figi,
     .ticker,
+    .uid,
   ]
 }
 
@@ -209,6 +296,228 @@ extension ShareType: CaseIterable {
 
 #endif  // swift(>=4.2)
 
+///Тип актива.
+public enum AssetType: SwiftProtobuf.Enum {
+  public typealias RawValue = Int
+
+  ///Тип не определён.
+  case unspecified // = 0
+
+  ///Валюта.
+  case currency // = 1
+
+  ///Товар.
+  case commodity // = 2
+
+  ///Индекс.
+  case index // = 3
+
+  ///Ценная бумага.
+  case security // = 4
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unspecified
+    case 1: self = .currency
+    case 2: self = .commodity
+    case 3: self = .index
+    case 4: self = .security
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unspecified: return 0
+    case .currency: return 1
+    case .commodity: return 2
+    case .index: return 3
+    case .security: return 4
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+}
+
+#if swift(>=4.2)
+
+extension AssetType: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static var allCases: [AssetType] = [
+    .unspecified,
+    .currency,
+    .commodity,
+    .index,
+    .security,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
+///Тип структурной ноты.
+public enum StructuredProductType: SwiftProtobuf.Enum {
+  public typealias RawValue = Int
+
+  ///Тип не определён.
+  case spTypeUnspecified // = 0
+
+  ///Поставочный.
+  case spTypeDeliverable // = 1
+
+  ///Беспоставочный.
+  case spTypeNonDeliverable // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .spTypeUnspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .spTypeUnspecified
+    case 1: self = .spTypeDeliverable
+    case 2: self = .spTypeNonDeliverable
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .spTypeUnspecified: return 0
+    case .spTypeDeliverable: return 1
+    case .spTypeNonDeliverable: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+}
+
+#if swift(>=4.2)
+
+extension StructuredProductType: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static var allCases: [StructuredProductType] = [
+    .spTypeUnspecified,
+    .spTypeDeliverable,
+    .spTypeNonDeliverable,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
+///Тип действия со списком избранных инструментов.
+public enum EditFavoritesActionType: SwiftProtobuf.Enum {
+  public typealias RawValue = Int
+
+  ///Тип не определён.
+  case unspecified // = 0
+
+  ///Добавить в список.
+  case add // = 1
+
+  ///Удалить из списка.
+  case del // = 2
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unspecified
+    case 1: self = .add
+    case 2: self = .del
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unspecified: return 0
+    case .add: return 1
+    case .del: return 2
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+}
+
+#if swift(>=4.2)
+
+extension EditFavoritesActionType: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static var allCases: [EditFavoritesActionType] = [
+    .unspecified,
+    .add,
+    .del,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
+///Реальная площадка исполнения расчётов.
+public enum RealExchange: SwiftProtobuf.Enum {
+  public typealias RawValue = Int
+
+  ///Тип не определён.
+  case unspecified // = 0
+
+  ///Московская биржа.
+  case moex // = 1
+
+  ///Санкт-Петербургская биржа.
+  case rts // = 2
+
+  ///Внебиржевой инструмент.
+  case otc // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .unspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .unspecified
+    case 1: self = .moex
+    case 2: self = .rts
+    case 3: self = .otc
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .unspecified: return 0
+    case .moex: return 1
+    case .rts: return 2
+    case .otc: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+}
+
+#if swift(>=4.2)
+
+extension RealExchange: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static var allCases: [RealExchange] = [
+    .unspecified,
+    .moex,
+    .rts,
+    .otc,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
 ///Запрос расписания торгов
 public struct TradingSchedulesRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -285,66 +594,135 @@ public struct TradingDay {
 
   /// Дата.
   public var date: SwiftProtobuf.Google_Protobuf_Timestamp {
-    get {return _date ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
-    set {_date = newValue}
+    get {return _storage._date ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._date = newValue}
   }
   /// Returns true if `date` has been explicitly set.
-  public var hasDate: Bool {return self._date != nil}
+  public var hasDate: Bool {return _storage._date != nil}
   /// Clears the value of `date`. Subsequent reads from it will return its default value.
-  public mutating func clearDate() {self._date = nil}
+  public mutating func clearDate() {_uniqueStorage()._date = nil}
 
   /// Признак торгового дня на бирже.
-  public var isTradingDay: Bool = false
+  public var isTradingDay: Bool {
+    get {return _storage._isTradingDay}
+    set {_uniqueStorage()._isTradingDay = newValue}
+  }
 
   /// Время начала торгов по часовому поясу UTC.
   public var startTime: SwiftProtobuf.Google_Protobuf_Timestamp {
-    get {return _startTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
-    set {_startTime = newValue}
+    get {return _storage._startTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._startTime = newValue}
   }
   /// Returns true if `startTime` has been explicitly set.
-  public var hasStartTime: Bool {return self._startTime != nil}
+  public var hasStartTime: Bool {return _storage._startTime != nil}
   /// Clears the value of `startTime`. Subsequent reads from it will return its default value.
-  public mutating func clearStartTime() {self._startTime = nil}
+  public mutating func clearStartTime() {_uniqueStorage()._startTime = nil}
 
   /// Время окончания торгов по часовому поясу UTC.
   public var endTime: SwiftProtobuf.Google_Protobuf_Timestamp {
-    get {return _endTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
-    set {_endTime = newValue}
+    get {return _storage._endTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._endTime = newValue}
   }
   /// Returns true if `endTime` has been explicitly set.
-  public var hasEndTime: Bool {return self._endTime != nil}
+  public var hasEndTime: Bool {return _storage._endTime != nil}
   /// Clears the value of `endTime`. Subsequent reads from it will return its default value.
-  public mutating func clearEndTime() {self._endTime = nil}
+  public mutating func clearEndTime() {_uniqueStorage()._endTime = nil}
 
-  /// Время начала подачи заявки по часовому поясу UTC.
-  public var marketOrderStartTime: SwiftProtobuf.Google_Protobuf_Timestamp {
-    get {return _marketOrderStartTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
-    set {_marketOrderStartTime = newValue}
+  /// Время начала аукциона открытия в часовом поясе UTC.
+  public var openingAuctionStartTime: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._openingAuctionStartTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._openingAuctionStartTime = newValue}
   }
-  /// Returns true if `marketOrderStartTime` has been explicitly set.
-  public var hasMarketOrderStartTime: Bool {return self._marketOrderStartTime != nil}
-  /// Clears the value of `marketOrderStartTime`. Subsequent reads from it will return its default value.
-  public mutating func clearMarketOrderStartTime() {self._marketOrderStartTime = nil}
+  /// Returns true if `openingAuctionStartTime` has been explicitly set.
+  public var hasOpeningAuctionStartTime: Bool {return _storage._openingAuctionStartTime != nil}
+  /// Clears the value of `openingAuctionStartTime`. Subsequent reads from it will return its default value.
+  public mutating func clearOpeningAuctionStartTime() {_uniqueStorage()._openingAuctionStartTime = nil}
 
-  /// Время окончания подачи заявки по часовому поясу UTC.
-  public var marketOrderEndTime: SwiftProtobuf.Google_Protobuf_Timestamp {
-    get {return _marketOrderEndTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
-    set {_marketOrderEndTime = newValue}
+  /// Время окончания аукциона закрытия в часовом поясе UTC.
+  public var closingAuctionEndTime: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._closingAuctionEndTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._closingAuctionEndTime = newValue}
   }
-  /// Returns true if `marketOrderEndTime` has been explicitly set.
-  public var hasMarketOrderEndTime: Bool {return self._marketOrderEndTime != nil}
-  /// Clears the value of `marketOrderEndTime`. Subsequent reads from it will return its default value.
-  public mutating func clearMarketOrderEndTime() {self._marketOrderEndTime = nil}
+  /// Returns true if `closingAuctionEndTime` has been explicitly set.
+  public var hasClosingAuctionEndTime: Bool {return _storage._closingAuctionEndTime != nil}
+  /// Clears the value of `closingAuctionEndTime`. Subsequent reads from it will return its default value.
+  public mutating func clearClosingAuctionEndTime() {_uniqueStorage()._closingAuctionEndTime = nil}
+
+  /// Время начала аукциона открытия вечерней сессии в часовом поясе UTC.
+  public var eveningOpeningAuctionStartTime: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._eveningOpeningAuctionStartTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._eveningOpeningAuctionStartTime = newValue}
+  }
+  /// Returns true if `eveningOpeningAuctionStartTime` has been explicitly set.
+  public var hasEveningOpeningAuctionStartTime: Bool {return _storage._eveningOpeningAuctionStartTime != nil}
+  /// Clears the value of `eveningOpeningAuctionStartTime`. Subsequent reads from it will return its default value.
+  public mutating func clearEveningOpeningAuctionStartTime() {_uniqueStorage()._eveningOpeningAuctionStartTime = nil}
+
+  /// Время начала вечерней сессии в часовом поясе UTC.
+  public var eveningStartTime: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._eveningStartTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._eveningStartTime = newValue}
+  }
+  /// Returns true if `eveningStartTime` has been explicitly set.
+  public var hasEveningStartTime: Bool {return _storage._eveningStartTime != nil}
+  /// Clears the value of `eveningStartTime`. Subsequent reads from it will return its default value.
+  public mutating func clearEveningStartTime() {_uniqueStorage()._eveningStartTime = nil}
+
+  /// Время окончания вечерней сессии в часовом поясе UTC.
+  public var eveningEndTime: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._eveningEndTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._eveningEndTime = newValue}
+  }
+  /// Returns true if `eveningEndTime` has been explicitly set.
+  public var hasEveningEndTime: Bool {return _storage._eveningEndTime != nil}
+  /// Clears the value of `eveningEndTime`. Subsequent reads from it will return its default value.
+  public mutating func clearEveningEndTime() {_uniqueStorage()._eveningEndTime = nil}
+
+  /// Время начала основного клиринга в часовом поясе UTC.
+  public var clearingStartTime: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._clearingStartTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._clearingStartTime = newValue}
+  }
+  /// Returns true if `clearingStartTime` has been explicitly set.
+  public var hasClearingStartTime: Bool {return _storage._clearingStartTime != nil}
+  /// Clears the value of `clearingStartTime`. Subsequent reads from it will return its default value.
+  public mutating func clearClearingStartTime() {_uniqueStorage()._clearingStartTime = nil}
+
+  /// Время окончания основного клиринга в часовом поясе UTC.
+  public var clearingEndTime: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._clearingEndTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._clearingEndTime = newValue}
+  }
+  /// Returns true if `clearingEndTime` has been explicitly set.
+  public var hasClearingEndTime: Bool {return _storage._clearingEndTime != nil}
+  /// Clears the value of `clearingEndTime`. Subsequent reads from it will return its default value.
+  public mutating func clearClearingEndTime() {_uniqueStorage()._clearingEndTime = nil}
+
+  /// Время начала премаркета в часовом поясе UTC.
+  public var premarketStartTime: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._premarketStartTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._premarketStartTime = newValue}
+  }
+  /// Returns true if `premarketStartTime` has been explicitly set.
+  public var hasPremarketStartTime: Bool {return _storage._premarketStartTime != nil}
+  /// Clears the value of `premarketStartTime`. Subsequent reads from it will return its default value.
+  public mutating func clearPremarketStartTime() {_uniqueStorage()._premarketStartTime = nil}
+
+  /// Время окончания премаркета в часовом поясе UTC.
+  public var premarketEndTime: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._premarketEndTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._premarketEndTime = newValue}
+  }
+  /// Returns true if `premarketEndTime` has been explicitly set.
+  public var hasPremarketEndTime: Bool {return _storage._premarketEndTime != nil}
+  /// Clears the value of `premarketEndTime`. Subsequent reads from it will return its default value.
+  public mutating func clearPremarketEndTime() {_uniqueStorage()._premarketEndTime = nil}
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 
-  fileprivate var _date: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
-  fileprivate var _startTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
-  fileprivate var _endTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
-  fileprivate var _marketOrderStartTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
-  fileprivate var _marketOrderEndTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 ///Запрос получения инструмента по идентификатору.
@@ -353,7 +731,7 @@ public struct InstrumentRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// Тип идентификатора инструмента. Возможные значения: figi, ticker, isin. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)
+  /// Тип идентификатора инструмента. Возможные значения: figi, ticker. Подробнее об идентификации инструментов: [Идентификация инструментов](https://tinkoff.github.io/investAPI/faq_identification/)
   public var idType: InstrumentIdType = .instrumentIDUnspecified
 
   /// Идентификатор class_code. Обязателен при id_type = ticker.
@@ -416,6 +794,135 @@ public struct BondsResponse {
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
+}
+
+///Запрос купонов по облигации.
+public struct GetBondCouponsRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Figi-идентификатор инструмента.
+  public var figi: String = String()
+
+  ///Начало запрашиваемого периода в часовом поясе UTC. Фильтрация по coupon_date (дата выплаты купона)
+  public var from: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _from ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_from = newValue}
+  }
+  /// Returns true if `from` has been explicitly set.
+  public var hasFrom: Bool {return self._from != nil}
+  /// Clears the value of `from`. Subsequent reads from it will return its default value.
+  public mutating func clearFrom() {self._from = nil}
+
+  ///Окончание запрашиваемого периода в часовом поясе UTC. Фильтрация по coupon_date (дата выплаты купона)
+  public var to: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _to ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_to = newValue}
+  }
+  /// Returns true if `to` has been explicitly set.
+  public var hasTo: Bool {return self._to != nil}
+  /// Clears the value of `to`. Subsequent reads from it will return its default value.
+  public mutating func clearTo() {self._to = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _from: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+  fileprivate var _to: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+}
+
+///Купоны по облигации.
+public struct GetBondCouponsResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var events: [Coupon] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+///Объект передачи информации о купоне облигации.
+public struct Coupon {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Figi-идентификатор инструмента.
+  public var figi: String = String()
+
+  ///Дата выплаты купона
+  public var couponDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _couponDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_couponDate = newValue}
+  }
+  /// Returns true if `couponDate` has been explicitly set.
+  public var hasCouponDate: Bool {return self._couponDate != nil}
+  /// Clears the value of `couponDate`. Subsequent reads from it will return its default value.
+  public mutating func clearCouponDate() {self._couponDate = nil}
+
+  ///Номер купона
+  public var couponNumber: Int64 = 0
+
+  ///(Опционально) Дата фиксации реестра для выплаты купона
+  public var fixDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _fixDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_fixDate = newValue}
+  }
+  /// Returns true if `fixDate` has been explicitly set.
+  public var hasFixDate: Bool {return self._fixDate != nil}
+  /// Clears the value of `fixDate`. Subsequent reads from it will return its default value.
+  public mutating func clearFixDate() {self._fixDate = nil}
+
+  ///Выплата на одну облигацию
+  public var payOneBond: MoneyValue {
+    get {return _payOneBond ?? MoneyValue()}
+    set {_payOneBond = newValue}
+  }
+  /// Returns true if `payOneBond` has been explicitly set.
+  public var hasPayOneBond: Bool {return self._payOneBond != nil}
+  /// Clears the value of `payOneBond`. Subsequent reads from it will return its default value.
+  public mutating func clearPayOneBond() {self._payOneBond = nil}
+
+  ///Тип купона
+  public var couponType: CouponType = .unspecified
+
+  ///Начало купонного периода.
+  public var couponStartDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _couponStartDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_couponStartDate = newValue}
+  }
+  /// Returns true if `couponStartDate` has been explicitly set.
+  public var hasCouponStartDate: Bool {return self._couponStartDate != nil}
+  /// Clears the value of `couponStartDate`. Subsequent reads from it will return its default value.
+  public mutating func clearCouponStartDate() {self._couponStartDate = nil}
+
+  ///Окончание купонного периода.
+  public var couponEndDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _couponEndDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_couponEndDate = newValue}
+  }
+  /// Returns true if `couponEndDate` has been explicitly set.
+  public var hasCouponEndDate: Bool {return self._couponEndDate != nil}
+  /// Clears the value of `couponEndDate`. Subsequent reads from it will return its default value.
+  public mutating func clearCouponEndDate() {self._couponEndDate = nil}
+
+  ///Купонный период в днях.
+  public var couponPeriod: Int32 = 0
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _couponDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+  fileprivate var _fixDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+  fileprivate var _payOneBond: MoneyValue? = nil
+  fileprivate var _couponStartDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+  fileprivate var _couponEndDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
 }
 
 ///Данные по валюте.
@@ -752,13 +1259,13 @@ public struct Bond {
   /// Clears the value of `aciValue`. Subsequent reads from it will return its default value.
   public mutating func clearAciValue() {_uniqueStorage()._aciValue = nil}
 
-  ///Код страны эмитента.
+  ///Код страны риска, т.е. страны, в которой компания ведёт основной бизнес.
   public var countryOfRisk: String {
     get {return _storage._countryOfRisk}
     set {_uniqueStorage()._countryOfRisk = newValue}
   }
 
-  ///Наименование страны эмитента.
+  ///Наименование страны риска, т.е. страны, в которой компания ведёт основной бизнес.
   public var countryOfRiskName: String {
     get {return _storage._countryOfRiskName}
     set {_uniqueStorage()._countryOfRiskName = newValue}
@@ -844,6 +1351,18 @@ public struct Bond {
   public var apiTradeAvailableFlag: Bool {
     get {return _storage._apiTradeAvailableFlag}
     set {_uniqueStorage()._apiTradeAvailableFlag = newValue}
+  }
+
+  ///Уникальный идентификатор инструмента.
+  public var uid: String {
+    get {return _storage._uid}
+    set {_uniqueStorage()._uid = newValue}
+  }
+
+  ///Реальная площадка исполнения расчётов.
+  public var realExchange: RealExchange {
+    get {return _storage._realExchange}
+    set {_uniqueStorage()._realExchange = newValue}
   }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -983,13 +1502,13 @@ public struct Currency {
   /// Clears the value of `nominal`. Subsequent reads from it will return its default value.
   public mutating func clearNominal() {_uniqueStorage()._nominal = nil}
 
-  ///Код страны эмитента.
+  ///Код страны риска, т.е. страны, в которой компания ведёт основной бизнес.
   public var countryOfRisk: String {
     get {return _storage._countryOfRisk}
     set {_uniqueStorage()._countryOfRisk = newValue}
   }
 
-  ///Наименование страны эмитента.
+  ///Наименование страны риска, т.е. страны, в которой компания ведёт основной бизнес.
   public var countryOfRiskName: String {
     get {return _storage._countryOfRiskName}
     set {_uniqueStorage()._countryOfRiskName = newValue}
@@ -1039,6 +1558,18 @@ public struct Currency {
   public var apiTradeAvailableFlag: Bool {
     get {return _storage._apiTradeAvailableFlag}
     set {_uniqueStorage()._apiTradeAvailableFlag = newValue}
+  }
+
+  ///Уникальный идентификатор инструмента.
+  public var uid: String {
+    get {return _storage._uid}
+    set {_uniqueStorage()._uid = newValue}
+  }
+
+  ///Реальная площадка исполнения расчётов.
+  public var realExchange: RealExchange {
+    get {return _storage._realExchange}
+    set {_uniqueStorage()._realExchange = newValue}
   }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1204,13 +1735,13 @@ public struct Etf {
   /// Clears the value of `numShares`. Subsequent reads from it will return its default value.
   public mutating func clearNumShares() {_uniqueStorage()._numShares = nil}
 
-  ///Код страны эмитента.
+  ///Код страны риска, т.е. страны, в которой компания ведёт основной бизнес.
   public var countryOfRisk: String {
     get {return _storage._countryOfRisk}
     set {_uniqueStorage()._countryOfRisk = newValue}
   }
 
-  ///Наименование страны эмитента.
+  ///Наименование страны риска, т.е. страны, в которой компания ведёт основной бизнес.
   public var countryOfRiskName: String {
     get {return _storage._countryOfRiskName}
     set {_uniqueStorage()._countryOfRiskName = newValue}
@@ -1266,6 +1797,18 @@ public struct Etf {
   public var apiTradeAvailableFlag: Bool {
     get {return _storage._apiTradeAvailableFlag}
     set {_uniqueStorage()._apiTradeAvailableFlag = newValue}
+  }
+
+  ///Уникальный идентификатор инструмента.
+  public var uid: String {
+    get {return _storage._uid}
+    set {_uniqueStorage()._uid = newValue}
+  }
+
+  ///Реальная площадка исполнения расчётов.
+  public var realExchange: RealExchange {
+    get {return _storage._realExchange}
+    set {_uniqueStorage()._realExchange = newValue}
   }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1437,13 +1980,13 @@ public struct Future {
   /// Clears the value of `basicAssetSize`. Subsequent reads from it will return its default value.
   public mutating func clearBasicAssetSize() {_uniqueStorage()._basicAssetSize = nil}
 
-  ///Код страны эмитента.
+  ///Код страны риска, т.е. страны, в которой компания ведёт основной бизнес.
   public var countryOfRisk: String {
     get {return _storage._countryOfRisk}
     set {_uniqueStorage()._countryOfRisk = newValue}
   }
 
-  ///Наименование страны эмитента.
+  ///Наименование страны риска, т.е. страны, в которой компания ведёт основной бизнес.
   public var countryOfRiskName: String {
     get {return _storage._countryOfRiskName}
     set {_uniqueStorage()._countryOfRiskName = newValue}
@@ -1455,7 +1998,7 @@ public struct Future {
     set {_uniqueStorage()._sector = newValue}
   }
 
-  ///Дата истечения срока.
+  ///Дата истечения срока в часов поясе UTC.
   public var expirationDate: SwiftProtobuf.Google_Protobuf_Timestamp {
     get {return _storage._expirationDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_uniqueStorage()._expirationDate = newValue}
@@ -1503,6 +2046,18 @@ public struct Future {
   public var apiTradeAvailableFlag: Bool {
     get {return _storage._apiTradeAvailableFlag}
     set {_uniqueStorage()._apiTradeAvailableFlag = newValue}
+  }
+
+  ///Уникальный идентификатор инструмента.
+  public var uid: String {
+    get {return _storage._uid}
+    set {_uniqueStorage()._uid = newValue}
+  }
+
+  ///Реальная площадка исполнения расчётов.
+  public var realExchange: RealExchange {
+    get {return _storage._realExchange}
+    set {_uniqueStorage()._realExchange = newValue}
   }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -1648,13 +2203,13 @@ public struct Share {
     set {_uniqueStorage()._issueSize = newValue}
   }
 
-  ///Код страны эмитента.
+  ///Код страны риска, т.е. страны, в которой компания ведёт основной бизнес.
   public var countryOfRisk: String {
     get {return _storage._countryOfRisk}
     set {_uniqueStorage()._countryOfRisk = newValue}
   }
 
-  ///Наименование страны эмитента.
+  ///Наименование страны риска, т.е. страны, в которой компания ведёт основной бизнес.
   public var countryOfRiskName: String {
     get {return _storage._countryOfRiskName}
     set {_uniqueStorage()._countryOfRiskName = newValue}
@@ -1732,6 +2287,18 @@ public struct Share {
   public var apiTradeAvailableFlag: Bool {
     get {return _storage._apiTradeAvailableFlag}
     set {_uniqueStorage()._apiTradeAvailableFlag = newValue}
+  }
+
+  ///Уникальный идентификатор инструмента.
+  public var uid: String {
+    get {return _storage._uid}
+    set {_uniqueStorage()._uid = newValue}
+  }
+
+  ///Реальная площадка исполнения расчётов.
+  public var realExchange: RealExchange {
+    get {return _storage._realExchange}
+    set {_uniqueStorage()._realExchange = newValue}
   }
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
@@ -2061,13 +2628,13 @@ public struct Instrument {
     set {_uniqueStorage()._exchange = newValue}
   }
 
-  ///Код страны эмитента.
+  ///Код страны риска, т.е. страны, в которой компания ведёт основной бизнес.
   public var countryOfRisk: String {
     get {return _storage._countryOfRisk}
     set {_uniqueStorage()._countryOfRisk = newValue}
   }
 
-  ///Наименование страны эмитента.
+  ///Наименование страны риска, т.е. страны, в которой компания ведёт основной бизнес.
   public var countryOfRiskName: String {
     get {return _storage._countryOfRiskName}
     set {_uniqueStorage()._countryOfRiskName = newValue}
@@ -2119,6 +2686,18 @@ public struct Instrument {
     set {_uniqueStorage()._apiTradeAvailableFlag = newValue}
   }
 
+  ///Уникальный идентификатор инструмента.
+  public var uid: String {
+    get {return _storage._uid}
+    set {_uniqueStorage()._uid = newValue}
+  }
+
+  ///Реальная площадка исполнения расчётов.
+  public var realExchange: RealExchange {
+    get {return _storage._realExchange}
+    set {_uniqueStorage()._realExchange = newValue}
+  }
+
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
@@ -2135,7 +2714,7 @@ public struct GetDividendsRequest {
   ///Figi-идентификатор инструмента.
   public var figi: String = String()
 
-  ///Начало запрашиваемого периода в часовом поясе UTC.
+  ///Начало запрашиваемого периода в часовом поясе UTC. Фильтрация происходит по параметру *record_date* (дата фиксации реестра).
   public var from: SwiftProtobuf.Google_Protobuf_Timestamp {
     get {return _from ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_from = newValue}
@@ -2145,7 +2724,7 @@ public struct GetDividendsRequest {
   /// Clears the value of `from`. Subsequent reads from it will return its default value.
   public mutating func clearFrom() {self._from = nil}
 
-  ///Окончание запрашиваемого периода в часовом поясе UTC.
+  ///Окончание запрашиваемого периода в часовом поясе UTC. Фильтрация происходит по параметру *record_date* (дата фиксации реестра).
   public var to: SwiftProtobuf.Google_Protobuf_Timestamp {
     get {return _to ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_to = newValue}
@@ -2192,7 +2771,7 @@ public struct Dividend {
   /// Clears the value of `dividendNet`. Subsequent reads from it will return its default value.
   public mutating func clearDividendNet() {_uniqueStorage()._dividendNet = nil}
 
-  ///Дата фактических выплат.
+  ///Дата фактических выплат в часовом поясе UTC.
   public var paymentDate: SwiftProtobuf.Google_Protobuf_Timestamp {
     get {return _storage._paymentDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_uniqueStorage()._paymentDate = newValue}
@@ -2202,7 +2781,7 @@ public struct Dividend {
   /// Clears the value of `paymentDate`. Subsequent reads from it will return its default value.
   public mutating func clearPaymentDate() {_uniqueStorage()._paymentDate = nil}
 
-  ///Дата объявления дивидендов.
+  ///Дата объявления дивидендов в часовом поясе UTC.
   public var declaredDate: SwiftProtobuf.Google_Protobuf_Timestamp {
     get {return _storage._declaredDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_uniqueStorage()._declaredDate = newValue}
@@ -2212,7 +2791,7 @@ public struct Dividend {
   /// Clears the value of `declaredDate`. Subsequent reads from it will return its default value.
   public mutating func clearDeclaredDate() {_uniqueStorage()._declaredDate = nil}
 
-  ///Последний день (включительно) покупки для получения выплаты.
+  ///Последний день (включительно) покупки для получения выплаты в часовом поясе UTC.
   public var lastBuyDate: SwiftProtobuf.Google_Protobuf_Timestamp {
     get {return _storage._lastBuyDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_uniqueStorage()._lastBuyDate = newValue}
@@ -2228,7 +2807,7 @@ public struct Dividend {
     set {_uniqueStorage()._dividendType = newValue}
   }
 
-  ///Дата фиксации реестра
+  ///Дата фиксации реестра в часовом поясе UTC.
   public var recordDate: SwiftProtobuf.Google_Protobuf_Timestamp {
     get {return _storage._recordDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_uniqueStorage()._recordDate = newValue}
@@ -2264,7 +2843,7 @@ public struct Dividend {
   /// Clears the value of `yieldValue`. Subsequent reads from it will return its default value.
   public mutating func clearYieldValue() {_uniqueStorage()._yieldValue = nil}
 
-  ///Дата и время создания записи.
+  ///Дата и время создания записи в часовом поясе UTC.
   public var createdAt: SwiftProtobuf.Google_Protobuf_Timestamp {
     get {return _storage._createdAt ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_uniqueStorage()._createdAt = newValue}
@@ -2281,15 +2860,1282 @@ public struct Dividend {
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
+///Запрос актива по идентификатору.
+public struct AssetRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///uid-идентификатор актива.
+  public var id: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+///Данные по активу.
+public struct AssetResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Актив.
+  public var asset: AssetFull {
+    get {return _asset ?? AssetFull()}
+    set {_asset = newValue}
+  }
+  /// Returns true if `asset` has been explicitly set.
+  public var hasAsset: Bool {return self._asset != nil}
+  /// Clears the value of `asset`. Subsequent reads from it will return its default value.
+  public mutating func clearAsset() {self._asset = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _asset: AssetFull? = nil
+}
+
+///Запрос списка активов.
+public struct AssetsRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+///Список активов.
+public struct AssetsResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Активы.
+  public var assets: [Asset] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+public struct AssetFull {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Уникальный идентификатор актива.
+  public var uid: String {
+    get {return _storage._uid}
+    set {_uniqueStorage()._uid = newValue}
+  }
+
+  ///Тип актива.
+  public var type: AssetType {
+    get {return _storage._type}
+    set {_uniqueStorage()._type = newValue}
+  }
+
+  ///Наименование актива.
+  public var name: String {
+    get {return _storage._name}
+    set {_uniqueStorage()._name = newValue}
+  }
+
+  ///Короткое наименование актива.
+  public var nameBrief: String {
+    get {return _storage._nameBrief}
+    set {_uniqueStorage()._nameBrief = newValue}
+  }
+
+  ///Описание актива.
+  public var description_p: String {
+    get {return _storage._description_p}
+    set {_uniqueStorage()._description_p = newValue}
+  }
+
+  ///Дата и время удаления актива.
+  public var deletedAt: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._deletedAt ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._deletedAt = newValue}
+  }
+  /// Returns true if `deletedAt` has been explicitly set.
+  public var hasDeletedAt: Bool {return _storage._deletedAt != nil}
+  /// Clears the value of `deletedAt`. Subsequent reads from it will return its default value.
+  public mutating func clearDeletedAt() {_uniqueStorage()._deletedAt = nil}
+
+  ///Тестирование клиентов.
+  public var requiredTests: [String] {
+    get {return _storage._requiredTests}
+    set {_uniqueStorage()._requiredTests = newValue}
+  }
+
+  public var ext: OneOf_Ext? {
+    get {return _storage._ext}
+    set {_uniqueStorage()._ext = newValue}
+  }
+
+  ///Валюта. Обязательно и заполняется только для type = "ASSET_TYPE_CURRENCY".
+  public var currency: AssetCurrency {
+    get {
+      if case .currency(let v)? = _storage._ext {return v}
+      return AssetCurrency()
+    }
+    set {_uniqueStorage()._ext = .currency(newValue)}
+  }
+
+  ///Ценная бумага. Обязательно и заполняется только для type = "ASSET_TYPE_SECURITY".
+  public var security: AssetSecurity {
+    get {
+      if case .security(let v)? = _storage._ext {return v}
+      return AssetSecurity()
+    }
+    set {_uniqueStorage()._ext = .security(newValue)}
+  }
+
+  ///Номер государственной регистрации.
+  public var gosRegCode: String {
+    get {return _storage._gosRegCode}
+    set {_uniqueStorage()._gosRegCode = newValue}
+  }
+
+  ///Код CFI.
+  public var cfi: String {
+    get {return _storage._cfi}
+    set {_uniqueStorage()._cfi = newValue}
+  }
+
+  ///Код НРД инструмента.
+  public var codeNsd: String {
+    get {return _storage._codeNsd}
+    set {_uniqueStorage()._codeNsd = newValue}
+  }
+
+  ///Статус актива.
+  public var status: String {
+    get {return _storage._status}
+    set {_uniqueStorage()._status = newValue}
+  }
+
+  ///Бренд.
+  public var brand: Brand {
+    get {return _storage._brand ?? Brand()}
+    set {_uniqueStorage()._brand = newValue}
+  }
+  /// Returns true if `brand` has been explicitly set.
+  public var hasBrand: Bool {return _storage._brand != nil}
+  /// Clears the value of `brand`. Subsequent reads from it will return its default value.
+  public mutating func clearBrand() {_uniqueStorage()._brand = nil}
+
+  ///Дата и время последнего обновления записи.
+  public var updatedAt: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._updatedAt ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._updatedAt = newValue}
+  }
+  /// Returns true if `updatedAt` has been explicitly set.
+  public var hasUpdatedAt: Bool {return _storage._updatedAt != nil}
+  /// Clears the value of `updatedAt`. Subsequent reads from it will return its default value.
+  public mutating func clearUpdatedAt() {_uniqueStorage()._updatedAt = nil}
+
+  ///Код типа ц.б. по классификации Банка России.
+  public var brCode: String {
+    get {return _storage._brCode}
+    set {_uniqueStorage()._brCode = newValue}
+  }
+
+  ///Наименование кода типа ц.б. по классификации Банка России.
+  public var brCodeName: String {
+    get {return _storage._brCodeName}
+    set {_uniqueStorage()._brCodeName = newValue}
+  }
+
+  ///Массив идентификаторов инструментов.
+  public var instruments: [AssetInstrument] {
+    get {return _storage._instruments}
+    set {_uniqueStorage()._instruments = newValue}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public enum OneOf_Ext: Equatable {
+    ///Валюта. Обязательно и заполняется только для type = "ASSET_TYPE_CURRENCY".
+    case currency(AssetCurrency)
+    ///Ценная бумага. Обязательно и заполняется только для type = "ASSET_TYPE_SECURITY".
+    case security(AssetSecurity)
+
+  #if !swift(>=4.1)
+    public static func ==(lhs: AssetFull.OneOf_Ext, rhs: AssetFull.OneOf_Ext) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch (lhs, rhs) {
+      case (.currency, .currency): return {
+        guard case .currency(let l) = lhs, case .currency(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.security, .security): return {
+        guard case .security(let l) = lhs, case .security(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      default: return false
+      }
+    }
+  #endif
+  }
+
+  public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+///Информация об активе.
+public struct Asset {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Уникальный идентификатор актива.
+  public var uid: String = String()
+
+  ///Тип актива.
+  public var type: AssetType = .unspecified
+
+  ///Наименование актива.
+  public var name: String = String()
+
+  ///Массив идентификаторов инструментов.
+  public var instruments: [AssetInstrument] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+///Валюта.
+public struct AssetCurrency {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///ISO-код валюты.
+  public var baseCurrency: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+///Ценная бумага.
+public struct AssetSecurity {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///ISIN-идентификатор ценной бумаги.
+  public var isin: String = String()
+
+  ///Тип ценной бумаги.
+  public var type: String = String()
+
+  public var ext: AssetSecurity.OneOf_Ext? = nil
+
+  ///Акция. Заполняется только для акций (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = share).
+  public var share: AssetShare {
+    get {
+      if case .share(let v)? = ext {return v}
+      return AssetShare()
+    }
+    set {ext = .share(newValue)}
+  }
+
+  ///Облигация. Заполняется только для облигаций (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = bond).
+  public var bond: AssetBond {
+    get {
+      if case .bond(let v)? = ext {return v}
+      return AssetBond()
+    }
+    set {ext = .bond(newValue)}
+  }
+
+  ///Структурная нота. Заполняется только для структурных продуктов (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = sp).
+  public var sp: AssetStructuredProduct {
+    get {
+      if case .sp(let v)? = ext {return v}
+      return AssetStructuredProduct()
+    }
+    set {ext = .sp(newValue)}
+  }
+
+  /// Фонд. Заполняется только для фондов (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = etf).
+  public var etf: AssetEtf {
+    get {
+      if case .etf(let v)? = ext {return v}
+      return AssetEtf()
+    }
+    set {ext = .etf(newValue)}
+  }
+
+  /// Клиринговый сертификат участия. Заполняется только для клиринговых сертификатов (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = clearing_certificate).
+  public var clearingCertificate: AssetClearingCertificate {
+    get {
+      if case .clearingCertificate(let v)? = ext {return v}
+      return AssetClearingCertificate()
+    }
+    set {ext = .clearingCertificate(newValue)}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public enum OneOf_Ext: Equatable {
+    ///Акция. Заполняется только для акций (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = share).
+    case share(AssetShare)
+    ///Облигация. Заполняется только для облигаций (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = bond).
+    case bond(AssetBond)
+    ///Структурная нота. Заполняется только для структурных продуктов (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = sp).
+    case sp(AssetStructuredProduct)
+    /// Фонд. Заполняется только для фондов (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = etf).
+    case etf(AssetEtf)
+    /// Клиринговый сертификат участия. Заполняется только для клиринговых сертификатов (тип актива asset.type = "ASSET_TYPE_SECURITY" и security.type = clearing_certificate).
+    case clearingCertificate(AssetClearingCertificate)
+
+  #if !swift(>=4.1)
+    public static func ==(lhs: AssetSecurity.OneOf_Ext, rhs: AssetSecurity.OneOf_Ext) -> Bool {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch (lhs, rhs) {
+      case (.share, .share): return {
+        guard case .share(let l) = lhs, case .share(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.bond, .bond): return {
+        guard case .bond(let l) = lhs, case .bond(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.sp, .sp): return {
+        guard case .sp(let l) = lhs, case .sp(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.etf, .etf): return {
+        guard case .etf(let l) = lhs, case .etf(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      case (.clearingCertificate, .clearingCertificate): return {
+        guard case .clearingCertificate(let l) = lhs, case .clearingCertificate(let r) = rhs else { preconditionFailure() }
+        return l == r
+      }()
+      default: return false
+      }
+    }
+  #endif
+  }
+
+  public init() {}
+}
+
+///Акция.
+public struct AssetShare {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Тип акции.
+  public var type: ShareType {
+    get {return _storage._type}
+    set {_uniqueStorage()._type = newValue}
+  }
+
+  ///Объем выпуска (шт.).
+  public var issueSize: Quotation {
+    get {return _storage._issueSize ?? Quotation()}
+    set {_uniqueStorage()._issueSize = newValue}
+  }
+  /// Returns true if `issueSize` has been explicitly set.
+  public var hasIssueSize: Bool {return _storage._issueSize != nil}
+  /// Clears the value of `issueSize`. Subsequent reads from it will return its default value.
+  public mutating func clearIssueSize() {_uniqueStorage()._issueSize = nil}
+
+  ///Номинал.
+  public var nominal: Quotation {
+    get {return _storage._nominal ?? Quotation()}
+    set {_uniqueStorage()._nominal = newValue}
+  }
+  /// Returns true if `nominal` has been explicitly set.
+  public var hasNominal: Bool {return _storage._nominal != nil}
+  /// Clears the value of `nominal`. Subsequent reads from it will return its default value.
+  public mutating func clearNominal() {_uniqueStorage()._nominal = nil}
+
+  ///Валюта номинала.
+  public var nominalCurrency: String {
+    get {return _storage._nominalCurrency}
+    set {_uniqueStorage()._nominalCurrency = newValue}
+  }
+
+  ///Индекс (Bloomberg).
+  public var primaryIndex: String {
+    get {return _storage._primaryIndex}
+    set {_uniqueStorage()._primaryIndex = newValue}
+  }
+
+  ///Ставка дивиденда (для привилегированных акций).
+  public var dividendRate: Quotation {
+    get {return _storage._dividendRate ?? Quotation()}
+    set {_uniqueStorage()._dividendRate = newValue}
+  }
+  /// Returns true if `dividendRate` has been explicitly set.
+  public var hasDividendRate: Bool {return _storage._dividendRate != nil}
+  /// Clears the value of `dividendRate`. Subsequent reads from it will return its default value.
+  public mutating func clearDividendRate() {_uniqueStorage()._dividendRate = nil}
+
+  ///Тип привилегированных акций.
+  public var preferredShareType: String {
+    get {return _storage._preferredShareType}
+    set {_uniqueStorage()._preferredShareType = newValue}
+  }
+
+  ///Дата IPO.
+  public var ipoDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._ipoDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._ipoDate = newValue}
+  }
+  /// Returns true if `ipoDate` has been explicitly set.
+  public var hasIpoDate: Bool {return _storage._ipoDate != nil}
+  /// Clears the value of `ipoDate`. Subsequent reads from it will return its default value.
+  public mutating func clearIpoDate() {_uniqueStorage()._ipoDate = nil}
+
+  ///Дата регистрации.
+  public var registryDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._registryDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._registryDate = newValue}
+  }
+  /// Returns true if `registryDate` has been explicitly set.
+  public var hasRegistryDate: Bool {return _storage._registryDate != nil}
+  /// Clears the value of `registryDate`. Subsequent reads from it will return its default value.
+  public mutating func clearRegistryDate() {_uniqueStorage()._registryDate = nil}
+
+  ///Признак наличия дивидендной доходности.
+  public var divYieldFlag: Bool {
+    get {return _storage._divYieldFlag}
+    set {_uniqueStorage()._divYieldFlag = newValue}
+  }
+
+  ///Форма выпуска ФИ.
+  public var issueKind: String {
+    get {return _storage._issueKind}
+    set {_uniqueStorage()._issueKind = newValue}
+  }
+
+  ///Дата размещения акции.
+  public var placementDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._placementDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._placementDate = newValue}
+  }
+  /// Returns true if `placementDate` has been explicitly set.
+  public var hasPlacementDate: Bool {return _storage._placementDate != nil}
+  /// Clears the value of `placementDate`. Subsequent reads from it will return its default value.
+  public mutating func clearPlacementDate() {_uniqueStorage()._placementDate = nil}
+
+  ///ISIN базового актива.
+  public var represIsin: String {
+    get {return _storage._represIsin}
+    set {_uniqueStorage()._represIsin = newValue}
+  }
+
+  ///Объявленное количество шт.
+  public var issueSizePlan: Quotation {
+    get {return _storage._issueSizePlan ?? Quotation()}
+    set {_uniqueStorage()._issueSizePlan = newValue}
+  }
+  /// Returns true if `issueSizePlan` has been explicitly set.
+  public var hasIssueSizePlan: Bool {return _storage._issueSizePlan != nil}
+  /// Clears the value of `issueSizePlan`. Subsequent reads from it will return its default value.
+  public mutating func clearIssueSizePlan() {_uniqueStorage()._issueSizePlan = nil}
+
+  ///Количество акций в свободном обращении.
+  public var totalFloat: Quotation {
+    get {return _storage._totalFloat ?? Quotation()}
+    set {_uniqueStorage()._totalFloat = newValue}
+  }
+  /// Returns true if `totalFloat` has been explicitly set.
+  public var hasTotalFloat: Bool {return _storage._totalFloat != nil}
+  /// Clears the value of `totalFloat`. Subsequent reads from it will return its default value.
+  public mutating func clearTotalFloat() {_uniqueStorage()._totalFloat = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+///Облигация.
+public struct AssetBond {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Текущий номинал.
+  public var currentNominal: Quotation {
+    get {return _storage._currentNominal ?? Quotation()}
+    set {_uniqueStorage()._currentNominal = newValue}
+  }
+  /// Returns true if `currentNominal` has been explicitly set.
+  public var hasCurrentNominal: Bool {return _storage._currentNominal != nil}
+  /// Clears the value of `currentNominal`. Subsequent reads from it will return its default value.
+  public mutating func clearCurrentNominal() {_uniqueStorage()._currentNominal = nil}
+
+  ///Наименование заемщика.
+  public var borrowName: String {
+    get {return _storage._borrowName}
+    set {_uniqueStorage()._borrowName = newValue}
+  }
+
+  ///Объем эмиссии облигации (стоимость).
+  public var issueSize: Quotation {
+    get {return _storage._issueSize ?? Quotation()}
+    set {_uniqueStorage()._issueSize = newValue}
+  }
+  /// Returns true if `issueSize` has been explicitly set.
+  public var hasIssueSize: Bool {return _storage._issueSize != nil}
+  /// Clears the value of `issueSize`. Subsequent reads from it will return its default value.
+  public mutating func clearIssueSize() {_uniqueStorage()._issueSize = nil}
+
+  ///Номинал облигации.
+  public var nominal: Quotation {
+    get {return _storage._nominal ?? Quotation()}
+    set {_uniqueStorage()._nominal = newValue}
+  }
+  /// Returns true if `nominal` has been explicitly set.
+  public var hasNominal: Bool {return _storage._nominal != nil}
+  /// Clears the value of `nominal`. Subsequent reads from it will return its default value.
+  public mutating func clearNominal() {_uniqueStorage()._nominal = nil}
+
+  ///Валюта номинала.
+  public var nominalCurrency: String {
+    get {return _storage._nominalCurrency}
+    set {_uniqueStorage()._nominalCurrency = newValue}
+  }
+
+  ///Форма выпуска облигации.
+  public var issueKind: String {
+    get {return _storage._issueKind}
+    set {_uniqueStorage()._issueKind = newValue}
+  }
+
+  ///Форма дохода облигации.
+  public var interestKind: String {
+    get {return _storage._interestKind}
+    set {_uniqueStorage()._interestKind = newValue}
+  }
+
+  ///Количество выплат в год.
+  public var couponQuantityPerYear: Int32 {
+    get {return _storage._couponQuantityPerYear}
+    set {_uniqueStorage()._couponQuantityPerYear = newValue}
+  }
+
+  ///Признак облигации с индексируемым номиналом.
+  public var indexedNominalFlag: Bool {
+    get {return _storage._indexedNominalFlag}
+    set {_uniqueStorage()._indexedNominalFlag = newValue}
+  }
+
+  ///Признак субординированной облигации.
+  public var subordinatedFlag: Bool {
+    get {return _storage._subordinatedFlag}
+    set {_uniqueStorage()._subordinatedFlag = newValue}
+  }
+
+  ///Признак обеспеченной облигации.
+  public var collateralFlag: Bool {
+    get {return _storage._collateralFlag}
+    set {_uniqueStorage()._collateralFlag = newValue}
+  }
+
+  ///Признак показывает, что купоны облигации не облагаются налогом (для mass market).
+  public var taxFreeFlag: Bool {
+    get {return _storage._taxFreeFlag}
+    set {_uniqueStorage()._taxFreeFlag = newValue}
+  }
+
+  ///Признак облигации с амортизацией долга.
+  public var amortizationFlag: Bool {
+    get {return _storage._amortizationFlag}
+    set {_uniqueStorage()._amortizationFlag = newValue}
+  }
+
+  ///Признак облигации с плавающим купоном.
+  public var floatingCouponFlag: Bool {
+    get {return _storage._floatingCouponFlag}
+    set {_uniqueStorage()._floatingCouponFlag = newValue}
+  }
+
+  ///Признак бессрочной облигации.
+  public var perpetualFlag: Bool {
+    get {return _storage._perpetualFlag}
+    set {_uniqueStorage()._perpetualFlag = newValue}
+  }
+
+  ///Дата погашения облигации.
+  public var maturityDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._maturityDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._maturityDate = newValue}
+  }
+  /// Returns true if `maturityDate` has been explicitly set.
+  public var hasMaturityDate: Bool {return _storage._maturityDate != nil}
+  /// Clears the value of `maturityDate`. Subsequent reads from it will return its default value.
+  public mutating func clearMaturityDate() {_uniqueStorage()._maturityDate = nil}
+
+  ///Описание и условия получения дополнительного дохода.
+  public var returnCondition: String {
+    get {return _storage._returnCondition}
+    set {_uniqueStorage()._returnCondition = newValue}
+  }
+
+  ///Дата выпуска облигации.
+  public var stateRegDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._stateRegDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._stateRegDate = newValue}
+  }
+  /// Returns true if `stateRegDate` has been explicitly set.
+  public var hasStateRegDate: Bool {return _storage._stateRegDate != nil}
+  /// Clears the value of `stateRegDate`. Subsequent reads from it will return its default value.
+  public mutating func clearStateRegDate() {_uniqueStorage()._stateRegDate = nil}
+
+  ///Дата размещения облигации.
+  public var placementDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._placementDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._placementDate = newValue}
+  }
+  /// Returns true if `placementDate` has been explicitly set.
+  public var hasPlacementDate: Bool {return _storage._placementDate != nil}
+  /// Clears the value of `placementDate`. Subsequent reads from it will return its default value.
+  public mutating func clearPlacementDate() {_uniqueStorage()._placementDate = nil}
+
+  ///Цена размещения облигации.
+  public var placementPrice: Quotation {
+    get {return _storage._placementPrice ?? Quotation()}
+    set {_uniqueStorage()._placementPrice = newValue}
+  }
+  /// Returns true if `placementPrice` has been explicitly set.
+  public var hasPlacementPrice: Bool {return _storage._placementPrice != nil}
+  /// Clears the value of `placementPrice`. Subsequent reads from it will return its default value.
+  public mutating func clearPlacementPrice() {_uniqueStorage()._placementPrice = nil}
+
+  ///Объявленное количество шт.
+  public var issueSizePlan: Quotation {
+    get {return _storage._issueSizePlan ?? Quotation()}
+    set {_uniqueStorage()._issueSizePlan = newValue}
+  }
+  /// Returns true if `issueSizePlan` has been explicitly set.
+  public var hasIssueSizePlan: Bool {return _storage._issueSizePlan != nil}
+  /// Clears the value of `issueSizePlan`. Subsequent reads from it will return its default value.
+  public mutating func clearIssueSizePlan() {_uniqueStorage()._issueSizePlan = nil}
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+///Структурная нота.
+public struct AssetStructuredProduct {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Наименование заемщика.
+  public var borrowName: String {
+    get {return _storage._borrowName}
+    set {_uniqueStorage()._borrowName = newValue}
+  }
+
+  ///Номинал.
+  public var nominal: Quotation {
+    get {return _storage._nominal ?? Quotation()}
+    set {_uniqueStorage()._nominal = newValue}
+  }
+  /// Returns true if `nominal` has been explicitly set.
+  public var hasNominal: Bool {return _storage._nominal != nil}
+  /// Clears the value of `nominal`. Subsequent reads from it will return its default value.
+  public mutating func clearNominal() {_uniqueStorage()._nominal = nil}
+
+  ///Валюта номинала.
+  public var nominalCurrency: String {
+    get {return _storage._nominalCurrency}
+    set {_uniqueStorage()._nominalCurrency = newValue}
+  }
+
+  ///Тип структурной ноты.
+  public var type: StructuredProductType {
+    get {return _storage._type}
+    set {_uniqueStorage()._type = newValue}
+  }
+
+  ///Стратегия портфеля.
+  public var logicPortfolio: String {
+    get {return _storage._logicPortfolio}
+    set {_uniqueStorage()._logicPortfolio = newValue}
+  }
+
+  ///Тип базового актива.
+  public var assetType: AssetType {
+    get {return _storage._assetType}
+    set {_uniqueStorage()._assetType = newValue}
+  }
+
+  ///Вид базового актива в зависимости от типа базового актива.
+  public var basicAsset: String {
+    get {return _storage._basicAsset}
+    set {_uniqueStorage()._basicAsset = newValue}
+  }
+
+  ///Барьер сохранности (в процентах).
+  public var safetyBarrier: Quotation {
+    get {return _storage._safetyBarrier ?? Quotation()}
+    set {_uniqueStorage()._safetyBarrier = newValue}
+  }
+  /// Returns true if `safetyBarrier` has been explicitly set.
+  public var hasSafetyBarrier: Bool {return _storage._safetyBarrier != nil}
+  /// Clears the value of `safetyBarrier`. Subsequent reads from it will return its default value.
+  public mutating func clearSafetyBarrier() {_uniqueStorage()._safetyBarrier = nil}
+
+  ///Дата погашения.
+  public var maturityDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._maturityDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._maturityDate = newValue}
+  }
+  /// Returns true if `maturityDate` has been explicitly set.
+  public var hasMaturityDate: Bool {return _storage._maturityDate != nil}
+  /// Clears the value of `maturityDate`. Subsequent reads from it will return its default value.
+  public mutating func clearMaturityDate() {_uniqueStorage()._maturityDate = nil}
+
+  ///Объявленное количество шт.
+  public var issueSizePlan: Quotation {
+    get {return _storage._issueSizePlan ?? Quotation()}
+    set {_uniqueStorage()._issueSizePlan = newValue}
+  }
+  /// Returns true if `issueSizePlan` has been explicitly set.
+  public var hasIssueSizePlan: Bool {return _storage._issueSizePlan != nil}
+  /// Clears the value of `issueSizePlan`. Subsequent reads from it will return its default value.
+  public mutating func clearIssueSizePlan() {_uniqueStorage()._issueSizePlan = nil}
+
+  ///Объем размещения.
+  public var issueSize: Quotation {
+    get {return _storage._issueSize ?? Quotation()}
+    set {_uniqueStorage()._issueSize = newValue}
+  }
+  /// Returns true if `issueSize` has been explicitly set.
+  public var hasIssueSize: Bool {return _storage._issueSize != nil}
+  /// Clears the value of `issueSize`. Subsequent reads from it will return its default value.
+  public mutating func clearIssueSize() {_uniqueStorage()._issueSize = nil}
+
+  ///Дата размещения ноты.
+  public var placementDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._placementDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._placementDate = newValue}
+  }
+  /// Returns true if `placementDate` has been explicitly set.
+  public var hasPlacementDate: Bool {return _storage._placementDate != nil}
+  /// Clears the value of `placementDate`. Subsequent reads from it will return its default value.
+  public mutating func clearPlacementDate() {_uniqueStorage()._placementDate = nil}
+
+  ///Форма выпуска.
+  public var issueKind: String {
+    get {return _storage._issueKind}
+    set {_uniqueStorage()._issueKind = newValue}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+///Фонд.
+public struct AssetEtf {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Суммарные расходы фонда (в %).
+  public var totalExpense: Quotation {
+    get {return _storage._totalExpense ?? Quotation()}
+    set {_uniqueStorage()._totalExpense = newValue}
+  }
+  /// Returns true if `totalExpense` has been explicitly set.
+  public var hasTotalExpense: Bool {return _storage._totalExpense != nil}
+  /// Clears the value of `totalExpense`. Subsequent reads from it will return its default value.
+  public mutating func clearTotalExpense() {_uniqueStorage()._totalExpense = nil}
+
+  ///Барьерная ставка доходности после которой фонд имеет право на perfomance fee (в процентах).
+  public var hurdleRate: Quotation {
+    get {return _storage._hurdleRate ?? Quotation()}
+    set {_uniqueStorage()._hurdleRate = newValue}
+  }
+  /// Returns true if `hurdleRate` has been explicitly set.
+  public var hasHurdleRate: Bool {return _storage._hurdleRate != nil}
+  /// Clears the value of `hurdleRate`. Subsequent reads from it will return its default value.
+  public mutating func clearHurdleRate() {_uniqueStorage()._hurdleRate = nil}
+
+  ///Комиссия за успешные результаты фонда (в процентах).
+  public var performanceFee: Quotation {
+    get {return _storage._performanceFee ?? Quotation()}
+    set {_uniqueStorage()._performanceFee = newValue}
+  }
+  /// Returns true if `performanceFee` has been explicitly set.
+  public var hasPerformanceFee: Bool {return _storage._performanceFee != nil}
+  /// Clears the value of `performanceFee`. Subsequent reads from it will return its default value.
+  public mutating func clearPerformanceFee() {_uniqueStorage()._performanceFee = nil}
+
+  ///Фиксированная комиссия за управление (в процентах).
+  public var fixedCommission: Quotation {
+    get {return _storage._fixedCommission ?? Quotation()}
+    set {_uniqueStorage()._fixedCommission = newValue}
+  }
+  /// Returns true if `fixedCommission` has been explicitly set.
+  public var hasFixedCommission: Bool {return _storage._fixedCommission != nil}
+  /// Clears the value of `fixedCommission`. Subsequent reads from it will return its default value.
+  public mutating func clearFixedCommission() {_uniqueStorage()._fixedCommission = nil}
+
+  ///Тип распределения доходов от выплат по бумагам.
+  public var paymentType: String {
+    get {return _storage._paymentType}
+    set {_uniqueStorage()._paymentType = newValue}
+  }
+
+  ///Признак необходимости выхода фонда в плюс для получения комиссии.
+  public var watermarkFlag: Bool {
+    get {return _storage._watermarkFlag}
+    set {_uniqueStorage()._watermarkFlag = newValue}
+  }
+
+  ///Премия (надбавка к цене) при покупке доли в фонде (в процентах).
+  public var buyPremium: Quotation {
+    get {return _storage._buyPremium ?? Quotation()}
+    set {_uniqueStorage()._buyPremium = newValue}
+  }
+  /// Returns true if `buyPremium` has been explicitly set.
+  public var hasBuyPremium: Bool {return _storage._buyPremium != nil}
+  /// Clears the value of `buyPremium`. Subsequent reads from it will return its default value.
+  public mutating func clearBuyPremium() {_uniqueStorage()._buyPremium = nil}
+
+  ///Ставка дисконта (вычет из цены) при продаже доли в фонде (в процентах).
+  public var sellDiscount: Quotation {
+    get {return _storage._sellDiscount ?? Quotation()}
+    set {_uniqueStorage()._sellDiscount = newValue}
+  }
+  /// Returns true if `sellDiscount` has been explicitly set.
+  public var hasSellDiscount: Bool {return _storage._sellDiscount != nil}
+  /// Clears the value of `sellDiscount`. Subsequent reads from it will return its default value.
+  public mutating func clearSellDiscount() {_uniqueStorage()._sellDiscount = nil}
+
+  ///Признак ребалансируемости портфеля фонда.
+  public var rebalancingFlag: Bool {
+    get {return _storage._rebalancingFlag}
+    set {_uniqueStorage()._rebalancingFlag = newValue}
+  }
+
+  ///Периодичность ребалансировки.
+  public var rebalancingFreq: String {
+    get {return _storage._rebalancingFreq}
+    set {_uniqueStorage()._rebalancingFreq = newValue}
+  }
+
+  ///Тип управления.
+  public var managementType: String {
+    get {return _storage._managementType}
+    set {_uniqueStorage()._managementType = newValue}
+  }
+
+  ///Индекс, который реплицирует (старается копировать) фонд.
+  public var primaryIndex: String {
+    get {return _storage._primaryIndex}
+    set {_uniqueStorage()._primaryIndex = newValue}
+  }
+
+  ///База ETF.
+  public var focusType: String {
+    get {return _storage._focusType}
+    set {_uniqueStorage()._focusType = newValue}
+  }
+
+  ///Признак использования заемных активов (плечо).
+  public var leveragedFlag: Bool {
+    get {return _storage._leveragedFlag}
+    set {_uniqueStorage()._leveragedFlag = newValue}
+  }
+
+  ///Количество акций в обращении.
+  public var numShare: Quotation {
+    get {return _storage._numShare ?? Quotation()}
+    set {_uniqueStorage()._numShare = newValue}
+  }
+  /// Returns true if `numShare` has been explicitly set.
+  public var hasNumShare: Bool {return _storage._numShare != nil}
+  /// Clears the value of `numShare`. Subsequent reads from it will return its default value.
+  public mutating func clearNumShare() {_uniqueStorage()._numShare = nil}
+
+  ///Признак обязательства по отчетности перед регулятором.
+  public var ucitsFlag: Bool {
+    get {return _storage._ucitsFlag}
+    set {_uniqueStorage()._ucitsFlag = newValue}
+  }
+
+  ///Дата выпуска.
+  public var releasedDate: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _storage._releasedDate ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._releasedDate = newValue}
+  }
+  /// Returns true if `releasedDate` has been explicitly set.
+  public var hasReleasedDate: Bool {return _storage._releasedDate != nil}
+  /// Clears the value of `releasedDate`. Subsequent reads from it will return its default value.
+  public mutating func clearReleasedDate() {_uniqueStorage()._releasedDate = nil}
+
+  ///Описание фонда.
+  public var description_p: String {
+    get {return _storage._description_p}
+    set {_uniqueStorage()._description_p = newValue}
+  }
+
+  ///Описание индекса, за которым следует фонд.
+  public var primaryIndexDescription: String {
+    get {return _storage._primaryIndexDescription}
+    set {_uniqueStorage()._primaryIndexDescription = newValue}
+  }
+
+  ///Основные компании, в которые вкладывается фонд.
+  public var primaryIndexCompany: String {
+    get {return _storage._primaryIndexCompany}
+    set {_uniqueStorage()._primaryIndexCompany = newValue}
+  }
+
+  ///Срок восстановления индекса (после просадки).
+  public var indexRecoveryPeriod: Quotation {
+    get {return _storage._indexRecoveryPeriod ?? Quotation()}
+    set {_uniqueStorage()._indexRecoveryPeriod = newValue}
+  }
+  /// Returns true if `indexRecoveryPeriod` has been explicitly set.
+  public var hasIndexRecoveryPeriod: Bool {return _storage._indexRecoveryPeriod != nil}
+  /// Clears the value of `indexRecoveryPeriod`. Subsequent reads from it will return its default value.
+  public mutating func clearIndexRecoveryPeriod() {_uniqueStorage()._indexRecoveryPeriod = nil}
+
+  ///IVAV-код.
+  public var inavCode: String {
+    get {return _storage._inavCode}
+    set {_uniqueStorage()._inavCode = newValue}
+  }
+
+  ///Признак наличия дивидендной доходности.
+  public var divYieldFlag: Bool {
+    get {return _storage._divYieldFlag}
+    set {_uniqueStorage()._divYieldFlag = newValue}
+  }
+
+  ///Комиссия на покрытие расходов фонда (в процентах).
+  public var expenseCommission: Quotation {
+    get {return _storage._expenseCommission ?? Quotation()}
+    set {_uniqueStorage()._expenseCommission = newValue}
+  }
+  /// Returns true if `expenseCommission` has been explicitly set.
+  public var hasExpenseCommission: Bool {return _storage._expenseCommission != nil}
+  /// Clears the value of `expenseCommission`. Subsequent reads from it will return its default value.
+  public mutating func clearExpenseCommission() {_uniqueStorage()._expenseCommission = nil}
+
+  ///Ошибка следования за индексом (в процентах).
+  public var primaryIndexTrackingError: Quotation {
+    get {return _storage._primaryIndexTrackingError ?? Quotation()}
+    set {_uniqueStorage()._primaryIndexTrackingError = newValue}
+  }
+  /// Returns true if `primaryIndexTrackingError` has been explicitly set.
+  public var hasPrimaryIndexTrackingError: Bool {return _storage._primaryIndexTrackingError != nil}
+  /// Clears the value of `primaryIndexTrackingError`. Subsequent reads from it will return its default value.
+  public mutating func clearPrimaryIndexTrackingError() {_uniqueStorage()._primaryIndexTrackingError = nil}
+
+  ///Плановая ребалансировка портфеля.
+  public var rebalancingPlan: String {
+    get {return _storage._rebalancingPlan}
+    set {_uniqueStorage()._rebalancingPlan = newValue}
+  }
+
+  ///Ставки налогообложения дивидендов и купонов.
+  public var taxRate: String {
+    get {return _storage._taxRate}
+    set {_uniqueStorage()._taxRate = newValue}
+  }
+
+  ///Даты ребалансировок.
+  public var rebalancingDates: [SwiftProtobuf.Google_Protobuf_Timestamp] {
+    get {return _storage._rebalancingDates}
+    set {_uniqueStorage()._rebalancingDates = newValue}
+  }
+
+  ///Форма выпуска.
+  public var issueKind: String {
+    get {return _storage._issueKind}
+    set {_uniqueStorage()._issueKind = newValue}
+  }
+
+  ///Номинал.
+  public var nominal: Quotation {
+    get {return _storage._nominal ?? Quotation()}
+    set {_uniqueStorage()._nominal = newValue}
+  }
+  /// Returns true if `nominal` has been explicitly set.
+  public var hasNominal: Bool {return _storage._nominal != nil}
+  /// Clears the value of `nominal`. Subsequent reads from it will return its default value.
+  public mutating func clearNominal() {_uniqueStorage()._nominal = nil}
+
+  ///Валюта номинала.
+  public var nominalCurrency: String {
+    get {return _storage._nominalCurrency}
+    set {_uniqueStorage()._nominalCurrency = newValue}
+  }
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _storage = _StorageClass.defaultInstance
+}
+
+///Клиринговый сертификат участия.
+public struct AssetClearingCertificate {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Номинал.
+  public var nominal: Quotation {
+    get {return _nominal ?? Quotation()}
+    set {_nominal = newValue}
+  }
+  /// Returns true if `nominal` has been explicitly set.
+  public var hasNominal: Bool {return self._nominal != nil}
+  /// Clears the value of `nominal`. Subsequent reads from it will return its default value.
+  public mutating func clearNominal() {self._nominal = nil}
+
+  ///Валюта номинала.
+  public var nominalCurrency: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+
+  fileprivate var _nominal: Quotation? = nil
+}
+
+///Бренд.
+public struct Brand {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///uid идентификатор бренда.
+  public var uid: String = String()
+
+  ///Наименование бренда.
+  public var name: String = String()
+
+  ///Описание.
+  public var description_p: String = String()
+
+  ///Информация о бренде.
+  public var info: String = String()
+
+  ///Компания.
+  public var company: String = String()
+
+  ///Сектор.
+  public var sector: String = String()
+
+  ///Код страны риска.
+  public var countryOfRisk: String = String()
+
+  ///Наименование страны риска.
+  public var countryOfRiskName: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+///Идентификаторы инструмента.
+public struct AssetInstrument {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///uid идентификатор инструмента.
+  public var uid: String = String()
+
+  ///figi идентификатор инструмента.
+  public var figi: String = String()
+
+  ///Тип инструмента.
+  public var instrumentType: String = String()
+
+  ///Тикер инструмента.
+  public var ticker: String = String()
+
+  ///Класс-код (секция торгов).
+  public var classCode: String = String()
+
+  ///Массив связанных инструментов.
+  public var links: [InstrumentLink] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+///Связь с другим инструментом.
+public struct InstrumentLink {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Тип связи.
+  public var type: String = String()
+
+  ///uid идентификатор связанного инструмента.
+  public var instrumentUid: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+///Запрос избранных инструментов.
+public struct GetFavoritesRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+///Ответ избранных инструментов.
+public struct GetFavoritesResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Массив инструментов
+  public var favoriteInstruments: [FavoriteInstrument] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+///Избранный инструмент.
+public struct FavoriteInstrument {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Figi-идентификатор инструмента.
+  public var figi: String = String()
+
+  ///Тикер инструмента.
+  public var ticker: String = String()
+
+  ///Класс-код инструмента.
+  public var classCode: String = String()
+
+  ///Isin-идентификатор инструмента.
+  public var isin: String = String()
+
+  ///Тип инструмента.
+  public var instrumentType: String = String()
+
+  ///Признак внебиржевой ценной бумаги.
+  public var otcFlag: Bool = false
+
+  ///Признак доступности торгов через API.
+  public var apiTradeAvailableFlag: Bool = false
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+///Запрос редактирования избранных инструментов.
+public struct EditFavoritesRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Массив инструментов.
+  public var instruments: [EditFavoritesRequestInstrument] = []
+
+  ///Тип действия со списком.
+  public var actionType: EditFavoritesActionType = .unspecified
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+///Избранный инструмент для редактирования.
+public struct EditFavoritesRequestInstrument {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Figi-идентификатор инструмента.
+  public var figi: String = String()
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
+///Результат редактирования избранных инструментов.
+public struct EditFavoritesResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  ///Массив инструментов
+  public var favoriteInstruments: [FavoriteInstrument] = []
+
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  public init() {}
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "tinkoff.public.invest.api.contract.v1"
+
+extension CouponType: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "COUPON_TYPE_UNSPECIFIED"),
+    1: .same(proto: "COUPON_TYPE_CONSTANT"),
+    2: .same(proto: "COUPON_TYPE_FLOATING"),
+    3: .same(proto: "COUPON_TYPE_DISCOUNT"),
+    4: .same(proto: "COUPON_TYPE_MORTGAGE"),
+    5: .same(proto: "COUPON_TYPE_FIX"),
+    6: .same(proto: "COUPON_TYPE_VARIABLE"),
+    7: .same(proto: "COUPON_TYPE_OTHER"),
+  ]
+}
 
 extension InstrumentIdType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "INSTRUMENT_ID_UNSPECIFIED"),
     1: .same(proto: "INSTRUMENT_ID_TYPE_FIGI"),
     2: .same(proto: "INSTRUMENT_ID_TYPE_TICKER"),
+    3: .same(proto: "INSTRUMENT_ID_TYPE_UID"),
   ]
 }
 
@@ -2312,6 +4158,41 @@ extension ShareType: SwiftProtobuf._ProtoNameProviding {
     6: .same(proto: "SHARE_TYPE_NY_REG_SHRS"),
     7: .same(proto: "SHARE_TYPE_CLOSED_END_FUND"),
     8: .same(proto: "SHARE_TYPE_REIT"),
+  ]
+}
+
+extension AssetType: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "ASSET_TYPE_UNSPECIFIED"),
+    1: .same(proto: "ASSET_TYPE_CURRENCY"),
+    2: .same(proto: "ASSET_TYPE_COMMODITY"),
+    3: .same(proto: "ASSET_TYPE_INDEX"),
+    4: .same(proto: "ASSET_TYPE_SECURITY"),
+  ]
+}
+
+extension StructuredProductType: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "SP_TYPE_UNSPECIFIED"),
+    1: .same(proto: "SP_TYPE_DELIVERABLE"),
+    2: .same(proto: "SP_TYPE_NON_DELIVERABLE"),
+  ]
+}
+
+extension EditFavoritesActionType: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "EDIT_FAVORITES_ACTION_TYPE_UNSPECIFIED"),
+    1: .same(proto: "EDIT_FAVORITES_ACTION_TYPE_ADD"),
+    2: .same(proto: "EDIT_FAVORITES_ACTION_TYPE_DEL"),
+  ]
+}
+
+extension RealExchange: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "REAL_EXCHANGE_UNSPECIFIED"),
+    1: .same(proto: "REAL_EXCHANGE_MOEX"),
+    2: .same(proto: "REAL_EXCHANGE_RTS"),
+    3: .same(proto: "REAL_EXCHANGE_OTC"),
   ]
 }
 
@@ -2440,60 +4321,158 @@ extension TradingDay: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     2: .standard(proto: "is_trading_day"),
     3: .standard(proto: "start_time"),
     4: .standard(proto: "end_time"),
-    5: .standard(proto: "market_order_start_time"),
-    6: .standard(proto: "market_order_end_time"),
+    7: .standard(proto: "opening_auction_start_time"),
+    8: .standard(proto: "closing_auction_end_time"),
+    9: .standard(proto: "evening_opening_auction_start_time"),
+    10: .standard(proto: "evening_start_time"),
+    11: .standard(proto: "evening_end_time"),
+    12: .standard(proto: "clearing_start_time"),
+    13: .standard(proto: "clearing_end_time"),
+    14: .standard(proto: "premarket_start_time"),
+    15: .standard(proto: "premarket_end_time"),
   ]
 
+  fileprivate class _StorageClass {
+    var _date: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _isTradingDay: Bool = false
+    var _startTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _endTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _openingAuctionStartTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _closingAuctionEndTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _eveningOpeningAuctionStartTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _eveningStartTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _eveningEndTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _clearingStartTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _clearingEndTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _premarketStartTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _premarketEndTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _date = source._date
+      _isTradingDay = source._isTradingDay
+      _startTime = source._startTime
+      _endTime = source._endTime
+      _openingAuctionStartTime = source._openingAuctionStartTime
+      _closingAuctionEndTime = source._closingAuctionEndTime
+      _eveningOpeningAuctionStartTime = source._eveningOpeningAuctionStartTime
+      _eveningStartTime = source._eveningStartTime
+      _eveningEndTime = source._eveningEndTime
+      _clearingStartTime = source._clearingStartTime
+      _clearingEndTime = source._clearingEndTime
+      _premarketStartTime = source._premarketStartTime
+      _premarketEndTime = source._premarketEndTime
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularMessageField(value: &self._date) }()
-      case 2: try { try decoder.decodeSingularBoolField(value: &self.isTradingDay) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._startTime) }()
-      case 4: try { try decoder.decodeSingularMessageField(value: &self._endTime) }()
-      case 5: try { try decoder.decodeSingularMessageField(value: &self._marketOrderStartTime) }()
-      case 6: try { try decoder.decodeSingularMessageField(value: &self._marketOrderEndTime) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularMessageField(value: &_storage._date) }()
+        case 2: try { try decoder.decodeSingularBoolField(value: &_storage._isTradingDay) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._startTime) }()
+        case 4: try { try decoder.decodeSingularMessageField(value: &_storage._endTime) }()
+        case 7: try { try decoder.decodeSingularMessageField(value: &_storage._openingAuctionStartTime) }()
+        case 8: try { try decoder.decodeSingularMessageField(value: &_storage._closingAuctionEndTime) }()
+        case 9: try { try decoder.decodeSingularMessageField(value: &_storage._eveningOpeningAuctionStartTime) }()
+        case 10: try { try decoder.decodeSingularMessageField(value: &_storage._eveningStartTime) }()
+        case 11: try { try decoder.decodeSingularMessageField(value: &_storage._eveningEndTime) }()
+        case 12: try { try decoder.decodeSingularMessageField(value: &_storage._clearingStartTime) }()
+        case 13: try { try decoder.decodeSingularMessageField(value: &_storage._clearingEndTime) }()
+        case 14: try { try decoder.decodeSingularMessageField(value: &_storage._premarketStartTime) }()
+        case 15: try { try decoder.decodeSingularMessageField(value: &_storage._premarketEndTime) }()
+        default: break
+        }
       }
     }
   }
 
   public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    // The use of inline closures is to circumvent an issue where the compiler
-    // allocates stack space for every if/case branch local when no optimizations
-    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
-    // https://github.com/apple/swift-protobuf/issues/1182
-    try { if let v = self._date {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
-    } }()
-    if self.isTradingDay != false {
-      try visitor.visitSingularBoolField(value: self.isTradingDay, fieldNumber: 2)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      try { if let v = _storage._date {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      } }()
+      if _storage._isTradingDay != false {
+        try visitor.visitSingularBoolField(value: _storage._isTradingDay, fieldNumber: 2)
+      }
+      try { if let v = _storage._startTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      } }()
+      try { if let v = _storage._endTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      } }()
+      try { if let v = _storage._openingAuctionStartTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      } }()
+      try { if let v = _storage._closingAuctionEndTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+      } }()
+      try { if let v = _storage._eveningOpeningAuctionStartTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+      } }()
+      try { if let v = _storage._eveningStartTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+      } }()
+      try { if let v = _storage._eveningEndTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
+      } }()
+      try { if let v = _storage._clearingStartTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
+      } }()
+      try { if let v = _storage._clearingEndTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 13)
+      } }()
+      try { if let v = _storage._premarketStartTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
+      } }()
+      try { if let v = _storage._premarketEndTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
+      } }()
     }
-    try { if let v = self._startTime {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    } }()
-    try { if let v = self._endTime {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    } }()
-    try { if let v = self._marketOrderStartTime {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-    } }()
-    try { if let v = self._marketOrderEndTime {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-    } }()
     try unknownFields.traverse(visitor: &visitor)
   }
 
   public static func ==(lhs: TradingDay, rhs: TradingDay) -> Bool {
-    if lhs._date != rhs._date {return false}
-    if lhs.isTradingDay != rhs.isTradingDay {return false}
-    if lhs._startTime != rhs._startTime {return false}
-    if lhs._endTime != rhs._endTime {return false}
-    if lhs._marketOrderStartTime != rhs._marketOrderStartTime {return false}
-    if lhs._marketOrderEndTime != rhs._marketOrderEndTime {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._date != rhs_storage._date {return false}
+        if _storage._isTradingDay != rhs_storage._isTradingDay {return false}
+        if _storage._startTime != rhs_storage._startTime {return false}
+        if _storage._endTime != rhs_storage._endTime {return false}
+        if _storage._openingAuctionStartTime != rhs_storage._openingAuctionStartTime {return false}
+        if _storage._closingAuctionEndTime != rhs_storage._closingAuctionEndTime {return false}
+        if _storage._eveningOpeningAuctionStartTime != rhs_storage._eveningOpeningAuctionStartTime {return false}
+        if _storage._eveningStartTime != rhs_storage._eveningStartTime {return false}
+        if _storage._eveningEndTime != rhs_storage._eveningEndTime {return false}
+        if _storage._clearingStartTime != rhs_storage._clearingStartTime {return false}
+        if _storage._clearingEndTime != rhs_storage._clearingEndTime {return false}
+        if _storage._premarketStartTime != rhs_storage._premarketStartTime {return false}
+        if _storage._premarketEndTime != rhs_storage._premarketEndTime {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -2638,6 +4617,170 @@ extension BondsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementa
 
   public static func ==(lhs: BondsResponse, rhs: BondsResponse) -> Bool {
     if lhs.instruments != rhs.instruments {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension GetBondCouponsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetBondCouponsRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "figi"),
+    2: .same(proto: "from"),
+    3: .same(proto: "to"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.figi) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._from) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._to) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.figi.isEmpty {
+      try visitor.visitSingularStringField(value: self.figi, fieldNumber: 1)
+    }
+    try { if let v = self._from {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    try { if let v = self._to {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: GetBondCouponsRequest, rhs: GetBondCouponsRequest) -> Bool {
+    if lhs.figi != rhs.figi {return false}
+    if lhs._from != rhs._from {return false}
+    if lhs._to != rhs._to {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension GetBondCouponsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetBondCouponsResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "events"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.events) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.events.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.events, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: GetBondCouponsResponse, rhs: GetBondCouponsResponse) -> Bool {
+    if lhs.events != rhs.events {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Coupon: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Coupon"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "figi"),
+    2: .standard(proto: "coupon_date"),
+    3: .standard(proto: "coupon_number"),
+    4: .standard(proto: "fix_date"),
+    5: .standard(proto: "pay_one_bond"),
+    6: .standard(proto: "coupon_type"),
+    7: .standard(proto: "coupon_start_date"),
+    8: .standard(proto: "coupon_end_date"),
+    9: .standard(proto: "coupon_period"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.figi) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._couponDate) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.couponNumber) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._fixDate) }()
+      case 5: try { try decoder.decodeSingularMessageField(value: &self._payOneBond) }()
+      case 6: try { try decoder.decodeSingularEnumField(value: &self.couponType) }()
+      case 7: try { try decoder.decodeSingularMessageField(value: &self._couponStartDate) }()
+      case 8: try { try decoder.decodeSingularMessageField(value: &self._couponEndDate) }()
+      case 9: try { try decoder.decodeSingularInt32Field(value: &self.couponPeriod) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.figi.isEmpty {
+      try visitor.visitSingularStringField(value: self.figi, fieldNumber: 1)
+    }
+    try { if let v = self._couponDate {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    } }()
+    if self.couponNumber != 0 {
+      try visitor.visitSingularInt64Field(value: self.couponNumber, fieldNumber: 3)
+    }
+    try { if let v = self._fixDate {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    } }()
+    try { if let v = self._payOneBond {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    } }()
+    if self.couponType != .unspecified {
+      try visitor.visitSingularEnumField(value: self.couponType, fieldNumber: 6)
+    }
+    try { if let v = self._couponStartDate {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+    } }()
+    try { if let v = self._couponEndDate {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+    } }()
+    if self.couponPeriod != 0 {
+      try visitor.visitSingularInt32Field(value: self.couponPeriod, fieldNumber: 9)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Coupon, rhs: Coupon) -> Bool {
+    if lhs.figi != rhs.figi {return false}
+    if lhs._couponDate != rhs._couponDate {return false}
+    if lhs.couponNumber != rhs.couponNumber {return false}
+    if lhs._fixDate != rhs._fixDate {return false}
+    if lhs._payOneBond != rhs._payOneBond {return false}
+    if lhs.couponType != rhs.couponType {return false}
+    if lhs._couponStartDate != rhs._couponStartDate {return false}
+    if lhs._couponEndDate != rhs._couponEndDate {return false}
+    if lhs.couponPeriod != rhs.couponPeriod {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -2955,6 +5098,8 @@ extension Bond: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     37: .standard(proto: "amortization_flag"),
     38: .standard(proto: "min_price_increment"),
     39: .standard(proto: "api_trade_available_flag"),
+    40: .same(proto: "uid"),
+    41: .standard(proto: "real_exchange"),
   ]
 
   fileprivate class _StorageClass {
@@ -2995,6 +5140,8 @@ extension Bond: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
     var _amortizationFlag: Bool = false
     var _minPriceIncrement: Quotation? = nil
     var _apiTradeAvailableFlag: Bool = false
+    var _uid: String = String()
+    var _realExchange: RealExchange = .unspecified
 
     static let defaultInstance = _StorageClass()
 
@@ -3038,6 +5185,8 @@ extension Bond: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
       _amortizationFlag = source._amortizationFlag
       _minPriceIncrement = source._minPriceIncrement
       _apiTradeAvailableFlag = source._apiTradeAvailableFlag
+      _uid = source._uid
+      _realExchange = source._realExchange
     }
   }
 
@@ -3093,6 +5242,8 @@ extension Bond: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
         case 37: try { try decoder.decodeSingularBoolField(value: &_storage._amortizationFlag) }()
         case 38: try { try decoder.decodeSingularMessageField(value: &_storage._minPriceIncrement) }()
         case 39: try { try decoder.decodeSingularBoolField(value: &_storage._apiTradeAvailableFlag) }()
+        case 40: try { try decoder.decodeSingularStringField(value: &_storage._uid) }()
+        case 41: try { try decoder.decodeSingularEnumField(value: &_storage._realExchange) }()
         default: break
         }
       }
@@ -3216,6 +5367,12 @@ extension Bond: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
       if _storage._apiTradeAvailableFlag != false {
         try visitor.visitSingularBoolField(value: _storage._apiTradeAvailableFlag, fieldNumber: 39)
       }
+      if !_storage._uid.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._uid, fieldNumber: 40)
+      }
+      if _storage._realExchange != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._realExchange, fieldNumber: 41)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -3262,6 +5419,8 @@ extension Bond: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase,
         if _storage._amortizationFlag != rhs_storage._amortizationFlag {return false}
         if _storage._minPriceIncrement != rhs_storage._minPriceIncrement {return false}
         if _storage._apiTradeAvailableFlag != rhs_storage._apiTradeAvailableFlag {return false}
+        if _storage._uid != rhs_storage._uid {return false}
+        if _storage._realExchange != rhs_storage._realExchange {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -3299,6 +5458,8 @@ extension Currency: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
     24: .standard(proto: "iso_currency_name"),
     25: .standard(proto: "min_price_increment"),
     26: .standard(proto: "api_trade_available_flag"),
+    27: .same(proto: "uid"),
+    28: .standard(proto: "real_exchange"),
   ]
 
   fileprivate class _StorageClass {
@@ -3327,6 +5488,8 @@ extension Currency: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
     var _isoCurrencyName: String = String()
     var _minPriceIncrement: Quotation? = nil
     var _apiTradeAvailableFlag: Bool = false
+    var _uid: String = String()
+    var _realExchange: RealExchange = .unspecified
 
     static let defaultInstance = _StorageClass()
 
@@ -3358,6 +5521,8 @@ extension Currency: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
       _isoCurrencyName = source._isoCurrencyName
       _minPriceIncrement = source._minPriceIncrement
       _apiTradeAvailableFlag = source._apiTradeAvailableFlag
+      _uid = source._uid
+      _realExchange = source._realExchange
     }
   }
 
@@ -3401,6 +5566,8 @@ extension Currency: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
         case 24: try { try decoder.decodeSingularStringField(value: &_storage._isoCurrencyName) }()
         case 25: try { try decoder.decodeSingularMessageField(value: &_storage._minPriceIncrement) }()
         case 26: try { try decoder.decodeSingularBoolField(value: &_storage._apiTradeAvailableFlag) }()
+        case 27: try { try decoder.decodeSingularStringField(value: &_storage._uid) }()
+        case 28: try { try decoder.decodeSingularEnumField(value: &_storage._realExchange) }()
         default: break
         }
       }
@@ -3488,6 +5655,12 @@ extension Currency: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
       if _storage._apiTradeAvailableFlag != false {
         try visitor.visitSingularBoolField(value: _storage._apiTradeAvailableFlag, fieldNumber: 26)
       }
+      if !_storage._uid.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._uid, fieldNumber: 27)
+      }
+      if _storage._realExchange != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._realExchange, fieldNumber: 28)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -3522,6 +5695,8 @@ extension Currency: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
         if _storage._isoCurrencyName != rhs_storage._isoCurrencyName {return false}
         if _storage._minPriceIncrement != rhs_storage._minPriceIncrement {return false}
         if _storage._apiTradeAvailableFlag != rhs_storage._apiTradeAvailableFlag {return false}
+        if _storage._uid != rhs_storage._uid {return false}
+        if _storage._realExchange != rhs_storage._realExchange {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -3563,6 +5738,8 @@ extension Etf: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, 
     28: .standard(proto: "sell_available_flag"),
     29: .standard(proto: "min_price_increment"),
     30: .standard(proto: "api_trade_available_flag"),
+    31: .same(proto: "uid"),
+    32: .standard(proto: "real_exchange"),
   ]
 
   fileprivate class _StorageClass {
@@ -3595,6 +5772,8 @@ extension Etf: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, 
     var _sellAvailableFlag: Bool = false
     var _minPriceIncrement: Quotation? = nil
     var _apiTradeAvailableFlag: Bool = false
+    var _uid: String = String()
+    var _realExchange: RealExchange = .unspecified
 
     static let defaultInstance = _StorageClass()
 
@@ -3630,6 +5809,8 @@ extension Etf: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, 
       _sellAvailableFlag = source._sellAvailableFlag
       _minPriceIncrement = source._minPriceIncrement
       _apiTradeAvailableFlag = source._apiTradeAvailableFlag
+      _uid = source._uid
+      _realExchange = source._realExchange
     }
   }
 
@@ -3677,6 +5858,8 @@ extension Etf: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, 
         case 28: try { try decoder.decodeSingularBoolField(value: &_storage._sellAvailableFlag) }()
         case 29: try { try decoder.decodeSingularMessageField(value: &_storage._minPriceIncrement) }()
         case 30: try { try decoder.decodeSingularBoolField(value: &_storage._apiTradeAvailableFlag) }()
+        case 31: try { try decoder.decodeSingularStringField(value: &_storage._uid) }()
+        case 32: try { try decoder.decodeSingularEnumField(value: &_storage._realExchange) }()
         default: break
         }
       }
@@ -3776,6 +5959,12 @@ extension Etf: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, 
       if _storage._apiTradeAvailableFlag != false {
         try visitor.visitSingularBoolField(value: _storage._apiTradeAvailableFlag, fieldNumber: 30)
       }
+      if !_storage._uid.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._uid, fieldNumber: 31)
+      }
+      if _storage._realExchange != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._realExchange, fieldNumber: 32)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -3814,6 +6003,8 @@ extension Etf: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, 
         if _storage._sellAvailableFlag != rhs_storage._sellAvailableFlag {return false}
         if _storage._minPriceIncrement != rhs_storage._minPriceIncrement {return false}
         if _storage._apiTradeAvailableFlag != rhs_storage._apiTradeAvailableFlag {return false}
+        if _storage._uid != rhs_storage._uid {return false}
+        if _storage._realExchange != rhs_storage._realExchange {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -3856,6 +6047,8 @@ extension Future: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBas
     28: .standard(proto: "sell_available_flag"),
     29: .standard(proto: "min_price_increment"),
     30: .standard(proto: "api_trade_available_flag"),
+    31: .same(proto: "uid"),
+    32: .standard(proto: "real_exchange"),
   ]
 
   fileprivate class _StorageClass {
@@ -3889,6 +6082,8 @@ extension Future: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBas
     var _sellAvailableFlag: Bool = false
     var _minPriceIncrement: Quotation? = nil
     var _apiTradeAvailableFlag: Bool = false
+    var _uid: String = String()
+    var _realExchange: RealExchange = .unspecified
 
     static let defaultInstance = _StorageClass()
 
@@ -3925,6 +6120,8 @@ extension Future: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBas
       _sellAvailableFlag = source._sellAvailableFlag
       _minPriceIncrement = source._minPriceIncrement
       _apiTradeAvailableFlag = source._apiTradeAvailableFlag
+      _uid = source._uid
+      _realExchange = source._realExchange
     }
   }
 
@@ -3973,6 +6170,8 @@ extension Future: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBas
         case 28: try { try decoder.decodeSingularBoolField(value: &_storage._sellAvailableFlag) }()
         case 29: try { try decoder.decodeSingularMessageField(value: &_storage._minPriceIncrement) }()
         case 30: try { try decoder.decodeSingularBoolField(value: &_storage._apiTradeAvailableFlag) }()
+        case 31: try { try decoder.decodeSingularStringField(value: &_storage._uid) }()
+        case 32: try { try decoder.decodeSingularEnumField(value: &_storage._realExchange) }()
         default: break
         }
       }
@@ -4075,6 +6274,12 @@ extension Future: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBas
       if _storage._apiTradeAvailableFlag != false {
         try visitor.visitSingularBoolField(value: _storage._apiTradeAvailableFlag, fieldNumber: 30)
       }
+      if !_storage._uid.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._uid, fieldNumber: 31)
+      }
+      if _storage._realExchange != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._realExchange, fieldNumber: 32)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -4114,6 +6319,8 @@ extension Future: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBas
         if _storage._sellAvailableFlag != rhs_storage._sellAvailableFlag {return false}
         if _storage._minPriceIncrement != rhs_storage._minPriceIncrement {return false}
         if _storage._apiTradeAvailableFlag != rhs_storage._apiTradeAvailableFlag {return false}
+        if _storage._uid != rhs_storage._uid {return false}
+        if _storage._realExchange != rhs_storage._realExchange {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -4156,6 +6363,8 @@ extension Share: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase
     30: .standard(proto: "share_type"),
     31: .standard(proto: "min_price_increment"),
     32: .standard(proto: "api_trade_available_flag"),
+    33: .same(proto: "uid"),
+    34: .standard(proto: "real_exchange"),
   ]
 
   fileprivate class _StorageClass {
@@ -4189,6 +6398,8 @@ extension Share: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase
     var _shareType: ShareType = .unspecified
     var _minPriceIncrement: Quotation? = nil
     var _apiTradeAvailableFlag: Bool = false
+    var _uid: String = String()
+    var _realExchange: RealExchange = .unspecified
 
     static let defaultInstance = _StorageClass()
 
@@ -4225,6 +6436,8 @@ extension Share: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase
       _shareType = source._shareType
       _minPriceIncrement = source._minPriceIncrement
       _apiTradeAvailableFlag = source._apiTradeAvailableFlag
+      _uid = source._uid
+      _realExchange = source._realExchange
     }
   }
 
@@ -4273,6 +6486,8 @@ extension Share: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase
         case 30: try { try decoder.decodeSingularEnumField(value: &_storage._shareType) }()
         case 31: try { try decoder.decodeSingularMessageField(value: &_storage._minPriceIncrement) }()
         case 32: try { try decoder.decodeSingularBoolField(value: &_storage._apiTradeAvailableFlag) }()
+        case 33: try { try decoder.decodeSingularStringField(value: &_storage._uid) }()
+        case 34: try { try decoder.decodeSingularEnumField(value: &_storage._realExchange) }()
         default: break
         }
       }
@@ -4375,6 +6590,12 @@ extension Share: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase
       if _storage._apiTradeAvailableFlag != false {
         try visitor.visitSingularBoolField(value: _storage._apiTradeAvailableFlag, fieldNumber: 32)
       }
+      if !_storage._uid.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._uid, fieldNumber: 33)
+      }
+      if _storage._realExchange != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._realExchange, fieldNumber: 34)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -4414,6 +6635,8 @@ extension Share: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase
         if _storage._shareType != rhs_storage._shareType {return false}
         if _storage._minPriceIncrement != rhs_storage._minPriceIncrement {return false}
         if _storage._apiTradeAvailableFlag != rhs_storage._apiTradeAvailableFlag {return false}
+        if _storage._uid != rhs_storage._uid {return false}
+        if _storage._realExchange != rhs_storage._realExchange {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -4706,6 +6929,8 @@ extension Instrument: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     22: .standard(proto: "sell_available_flag"),
     23: .standard(proto: "min_price_increment"),
     24: .standard(proto: "api_trade_available_flag"),
+    25: .same(proto: "uid"),
+    26: .standard(proto: "real_exchange"),
   ]
 
   fileprivate class _StorageClass {
@@ -4733,6 +6958,8 @@ extension Instrument: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
     var _sellAvailableFlag: Bool = false
     var _minPriceIncrement: Quotation? = nil
     var _apiTradeAvailableFlag: Bool = false
+    var _uid: String = String()
+    var _realExchange: RealExchange = .unspecified
 
     static let defaultInstance = _StorageClass()
 
@@ -4763,6 +6990,8 @@ extension Instrument: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
       _sellAvailableFlag = source._sellAvailableFlag
       _minPriceIncrement = source._minPriceIncrement
       _apiTradeAvailableFlag = source._apiTradeAvailableFlag
+      _uid = source._uid
+      _realExchange = source._realExchange
     }
   }
 
@@ -4805,6 +7034,8 @@ extension Instrument: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
         case 22: try { try decoder.decodeSingularBoolField(value: &_storage._sellAvailableFlag) }()
         case 23: try { try decoder.decodeSingularMessageField(value: &_storage._minPriceIncrement) }()
         case 24: try { try decoder.decodeSingularBoolField(value: &_storage._apiTradeAvailableFlag) }()
+        case 25: try { try decoder.decodeSingularStringField(value: &_storage._uid) }()
+        case 26: try { try decoder.decodeSingularEnumField(value: &_storage._realExchange) }()
         default: break
         }
       }
@@ -4889,6 +7120,12 @@ extension Instrument: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
       if _storage._apiTradeAvailableFlag != false {
         try visitor.visitSingularBoolField(value: _storage._apiTradeAvailableFlag, fieldNumber: 24)
       }
+      if !_storage._uid.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._uid, fieldNumber: 25)
+      }
+      if _storage._realExchange != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._realExchange, fieldNumber: 26)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
@@ -4922,6 +7159,8 @@ extension Instrument: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementatio
         if _storage._sellAvailableFlag != rhs_storage._sellAvailableFlag {return false}
         if _storage._minPriceIncrement != rhs_storage._minPriceIncrement {return false}
         if _storage._apiTradeAvailableFlag != rhs_storage._apiTradeAvailableFlag {return false}
+        if _storage._uid != rhs_storage._uid {return false}
+        if _storage._realExchange != rhs_storage._realExchange {return false}
         return true
       }
       if !storagesAreEqual {return false}
@@ -5146,6 +7385,1890 @@ extension Dividend: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationB
       }
       if !storagesAreEqual {return false}
     }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AssetRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssetRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "id"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.id) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.id.isEmpty {
+      try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: AssetRequest, rhs: AssetRequest) -> Bool {
+    if lhs.id != rhs.id {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AssetResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssetResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "asset"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._asset) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._asset {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: AssetResponse, rhs: AssetResponse) -> Bool {
+    if lhs._asset != rhs._asset {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AssetsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssetsRequest"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: AssetsRequest, rhs: AssetsRequest) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AssetsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssetsResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "assets"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.assets) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.assets.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.assets, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: AssetsResponse, rhs: AssetsResponse) -> Bool {
+    if lhs.assets != rhs.assets {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AssetFull: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssetFull"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "uid"),
+    2: .same(proto: "type"),
+    3: .same(proto: "name"),
+    4: .standard(proto: "name_brief"),
+    5: .same(proto: "description"),
+    6: .standard(proto: "deleted_at"),
+    7: .standard(proto: "required_tests"),
+    8: .same(proto: "currency"),
+    9: .same(proto: "security"),
+    10: .standard(proto: "gos_reg_code"),
+    11: .same(proto: "cfi"),
+    12: .standard(proto: "code_nsd"),
+    13: .same(proto: "status"),
+    14: .same(proto: "brand"),
+    15: .standard(proto: "updated_at"),
+    16: .standard(proto: "br_code"),
+    17: .standard(proto: "br_code_name"),
+    18: .same(proto: "instruments"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _uid: String = String()
+    var _type: AssetType = .unspecified
+    var _name: String = String()
+    var _nameBrief: String = String()
+    var _description_p: String = String()
+    var _deletedAt: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _requiredTests: [String] = []
+    var _ext: AssetFull.OneOf_Ext?
+    var _gosRegCode: String = String()
+    var _cfi: String = String()
+    var _codeNsd: String = String()
+    var _status: String = String()
+    var _brand: Brand? = nil
+    var _updatedAt: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _brCode: String = String()
+    var _brCodeName: String = String()
+    var _instruments: [AssetInstrument] = []
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _uid = source._uid
+      _type = source._type
+      _name = source._name
+      _nameBrief = source._nameBrief
+      _description_p = source._description_p
+      _deletedAt = source._deletedAt
+      _requiredTests = source._requiredTests
+      _ext = source._ext
+      _gosRegCode = source._gosRegCode
+      _cfi = source._cfi
+      _codeNsd = source._codeNsd
+      _status = source._status
+      _brand = source._brand
+      _updatedAt = source._updatedAt
+      _brCode = source._brCode
+      _brCodeName = source._brCodeName
+      _instruments = source._instruments
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularStringField(value: &_storage._uid) }()
+        case 2: try { try decoder.decodeSingularEnumField(value: &_storage._type) }()
+        case 3: try { try decoder.decodeSingularStringField(value: &_storage._name) }()
+        case 4: try { try decoder.decodeSingularStringField(value: &_storage._nameBrief) }()
+        case 5: try { try decoder.decodeSingularStringField(value: &_storage._description_p) }()
+        case 6: try { try decoder.decodeSingularMessageField(value: &_storage._deletedAt) }()
+        case 7: try { try decoder.decodeRepeatedStringField(value: &_storage._requiredTests) }()
+        case 8: try {
+          var v: AssetCurrency?
+          var hadOneofValue = false
+          if let current = _storage._ext {
+            hadOneofValue = true
+            if case .currency(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {
+            if hadOneofValue {try decoder.handleConflictingOneOf()}
+            _storage._ext = .currency(v)
+          }
+        }()
+        case 9: try {
+          var v: AssetSecurity?
+          var hadOneofValue = false
+          if let current = _storage._ext {
+            hadOneofValue = true
+            if case .security(let m) = current {v = m}
+          }
+          try decoder.decodeSingularMessageField(value: &v)
+          if let v = v {
+            if hadOneofValue {try decoder.handleConflictingOneOf()}
+            _storage._ext = .security(v)
+          }
+        }()
+        case 10: try { try decoder.decodeSingularStringField(value: &_storage._gosRegCode) }()
+        case 11: try { try decoder.decodeSingularStringField(value: &_storage._cfi) }()
+        case 12: try { try decoder.decodeSingularStringField(value: &_storage._codeNsd) }()
+        case 13: try { try decoder.decodeSingularStringField(value: &_storage._status) }()
+        case 14: try { try decoder.decodeSingularMessageField(value: &_storage._brand) }()
+        case 15: try { try decoder.decodeSingularMessageField(value: &_storage._updatedAt) }()
+        case 16: try { try decoder.decodeSingularStringField(value: &_storage._brCode) }()
+        case 17: try { try decoder.decodeSingularStringField(value: &_storage._brCodeName) }()
+        case 18: try { try decoder.decodeRepeatedMessageField(value: &_storage._instruments) }()
+        default: break
+        }
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      if !_storage._uid.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._uid, fieldNumber: 1)
+      }
+      if _storage._type != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._type, fieldNumber: 2)
+      }
+      if !_storage._name.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._name, fieldNumber: 3)
+      }
+      if !_storage._nameBrief.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._nameBrief, fieldNumber: 4)
+      }
+      if !_storage._description_p.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._description_p, fieldNumber: 5)
+      }
+      try { if let v = _storage._deletedAt {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      } }()
+      if !_storage._requiredTests.isEmpty {
+        try visitor.visitRepeatedStringField(value: _storage._requiredTests, fieldNumber: 7)
+      }
+      switch _storage._ext {
+      case .currency?: try {
+        guard case .currency(let v)? = _storage._ext else { preconditionFailure() }
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+      }()
+      case .security?: try {
+        guard case .security(let v)? = _storage._ext else { preconditionFailure() }
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+      }()
+      case nil: break
+      }
+      if !_storage._gosRegCode.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._gosRegCode, fieldNumber: 10)
+      }
+      if !_storage._cfi.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._cfi, fieldNumber: 11)
+      }
+      if !_storage._codeNsd.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._codeNsd, fieldNumber: 12)
+      }
+      if !_storage._status.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._status, fieldNumber: 13)
+      }
+      try { if let v = _storage._brand {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
+      } }()
+      try { if let v = _storage._updatedAt {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
+      } }()
+      if !_storage._brCode.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._brCode, fieldNumber: 16)
+      }
+      if !_storage._brCodeName.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._brCodeName, fieldNumber: 17)
+      }
+      if !_storage._instruments.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._instruments, fieldNumber: 18)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: AssetFull, rhs: AssetFull) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._uid != rhs_storage._uid {return false}
+        if _storage._type != rhs_storage._type {return false}
+        if _storage._name != rhs_storage._name {return false}
+        if _storage._nameBrief != rhs_storage._nameBrief {return false}
+        if _storage._description_p != rhs_storage._description_p {return false}
+        if _storage._deletedAt != rhs_storage._deletedAt {return false}
+        if _storage._requiredTests != rhs_storage._requiredTests {return false}
+        if _storage._ext != rhs_storage._ext {return false}
+        if _storage._gosRegCode != rhs_storage._gosRegCode {return false}
+        if _storage._cfi != rhs_storage._cfi {return false}
+        if _storage._codeNsd != rhs_storage._codeNsd {return false}
+        if _storage._status != rhs_storage._status {return false}
+        if _storage._brand != rhs_storage._brand {return false}
+        if _storage._updatedAt != rhs_storage._updatedAt {return false}
+        if _storage._brCode != rhs_storage._brCode {return false}
+        if _storage._brCodeName != rhs_storage._brCodeName {return false}
+        if _storage._instruments != rhs_storage._instruments {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Asset: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Asset"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "uid"),
+    2: .same(proto: "type"),
+    3: .same(proto: "name"),
+    4: .same(proto: "instruments"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.uid) }()
+      case 2: try { try decoder.decodeSingularEnumField(value: &self.type) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      case 4: try { try decoder.decodeRepeatedMessageField(value: &self.instruments) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.uid.isEmpty {
+      try visitor.visitSingularStringField(value: self.uid, fieldNumber: 1)
+    }
+    if self.type != .unspecified {
+      try visitor.visitSingularEnumField(value: self.type, fieldNumber: 2)
+    }
+    if !self.name.isEmpty {
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 3)
+    }
+    if !self.instruments.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.instruments, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Asset, rhs: Asset) -> Bool {
+    if lhs.uid != rhs.uid {return false}
+    if lhs.type != rhs.type {return false}
+    if lhs.name != rhs.name {return false}
+    if lhs.instruments != rhs.instruments {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AssetCurrency: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssetCurrency"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "base_currency"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.baseCurrency) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.baseCurrency.isEmpty {
+      try visitor.visitSingularStringField(value: self.baseCurrency, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: AssetCurrency, rhs: AssetCurrency) -> Bool {
+    if lhs.baseCurrency != rhs.baseCurrency {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AssetSecurity: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssetSecurity"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "isin"),
+    2: .same(proto: "type"),
+    3: .same(proto: "share"),
+    4: .same(proto: "bond"),
+    5: .same(proto: "sp"),
+    6: .same(proto: "etf"),
+    7: .standard(proto: "clearing_certificate"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.isin) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.type) }()
+      case 3: try {
+        var v: AssetShare?
+        var hadOneofValue = false
+        if let current = self.ext {
+          hadOneofValue = true
+          if case .share(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.ext = .share(v)
+        }
+      }()
+      case 4: try {
+        var v: AssetBond?
+        var hadOneofValue = false
+        if let current = self.ext {
+          hadOneofValue = true
+          if case .bond(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.ext = .bond(v)
+        }
+      }()
+      case 5: try {
+        var v: AssetStructuredProduct?
+        var hadOneofValue = false
+        if let current = self.ext {
+          hadOneofValue = true
+          if case .sp(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.ext = .sp(v)
+        }
+      }()
+      case 6: try {
+        var v: AssetEtf?
+        var hadOneofValue = false
+        if let current = self.ext {
+          hadOneofValue = true
+          if case .etf(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.ext = .etf(v)
+        }
+      }()
+      case 7: try {
+        var v: AssetClearingCertificate?
+        var hadOneofValue = false
+        if let current = self.ext {
+          hadOneofValue = true
+          if case .clearingCertificate(let m) = current {v = m}
+        }
+        try decoder.decodeSingularMessageField(value: &v)
+        if let v = v {
+          if hadOneofValue {try decoder.handleConflictingOneOf()}
+          self.ext = .clearingCertificate(v)
+        }
+      }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    if !self.isin.isEmpty {
+      try visitor.visitSingularStringField(value: self.isin, fieldNumber: 1)
+    }
+    if !self.type.isEmpty {
+      try visitor.visitSingularStringField(value: self.type, fieldNumber: 2)
+    }
+    switch self.ext {
+    case .share?: try {
+      guard case .share(let v)? = self.ext else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    }()
+    case .bond?: try {
+      guard case .bond(let v)? = self.ext else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    }()
+    case .sp?: try {
+      guard case .sp(let v)? = self.ext else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+    }()
+    case .etf?: try {
+      guard case .etf(let v)? = self.ext else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+    }()
+    case .clearingCertificate?: try {
+      guard case .clearingCertificate(let v)? = self.ext else { preconditionFailure() }
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+    }()
+    case nil: break
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: AssetSecurity, rhs: AssetSecurity) -> Bool {
+    if lhs.isin != rhs.isin {return false}
+    if lhs.type != rhs.type {return false}
+    if lhs.ext != rhs.ext {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AssetShare: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssetShare"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "type"),
+    2: .standard(proto: "issue_size"),
+    3: .same(proto: "nominal"),
+    4: .standard(proto: "nominal_currency"),
+    5: .standard(proto: "primary_index"),
+    6: .standard(proto: "dividend_rate"),
+    7: .standard(proto: "preferred_share_type"),
+    8: .standard(proto: "ipo_date"),
+    9: .standard(proto: "registry_date"),
+    10: .standard(proto: "div_yield_flag"),
+    11: .standard(proto: "issue_kind"),
+    12: .standard(proto: "placement_date"),
+    13: .standard(proto: "repres_isin"),
+    14: .standard(proto: "issue_size_plan"),
+    15: .standard(proto: "total_float"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _type: ShareType = .unspecified
+    var _issueSize: Quotation? = nil
+    var _nominal: Quotation? = nil
+    var _nominalCurrency: String = String()
+    var _primaryIndex: String = String()
+    var _dividendRate: Quotation? = nil
+    var _preferredShareType: String = String()
+    var _ipoDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _registryDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _divYieldFlag: Bool = false
+    var _issueKind: String = String()
+    var _placementDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _represIsin: String = String()
+    var _issueSizePlan: Quotation? = nil
+    var _totalFloat: Quotation? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _type = source._type
+      _issueSize = source._issueSize
+      _nominal = source._nominal
+      _nominalCurrency = source._nominalCurrency
+      _primaryIndex = source._primaryIndex
+      _dividendRate = source._dividendRate
+      _preferredShareType = source._preferredShareType
+      _ipoDate = source._ipoDate
+      _registryDate = source._registryDate
+      _divYieldFlag = source._divYieldFlag
+      _issueKind = source._issueKind
+      _placementDate = source._placementDate
+      _represIsin = source._represIsin
+      _issueSizePlan = source._issueSizePlan
+      _totalFloat = source._totalFloat
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularEnumField(value: &_storage._type) }()
+        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._issueSize) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._nominal) }()
+        case 4: try { try decoder.decodeSingularStringField(value: &_storage._nominalCurrency) }()
+        case 5: try { try decoder.decodeSingularStringField(value: &_storage._primaryIndex) }()
+        case 6: try { try decoder.decodeSingularMessageField(value: &_storage._dividendRate) }()
+        case 7: try { try decoder.decodeSingularStringField(value: &_storage._preferredShareType) }()
+        case 8: try { try decoder.decodeSingularMessageField(value: &_storage._ipoDate) }()
+        case 9: try { try decoder.decodeSingularMessageField(value: &_storage._registryDate) }()
+        case 10: try { try decoder.decodeSingularBoolField(value: &_storage._divYieldFlag) }()
+        case 11: try { try decoder.decodeSingularStringField(value: &_storage._issueKind) }()
+        case 12: try { try decoder.decodeSingularMessageField(value: &_storage._placementDate) }()
+        case 13: try { try decoder.decodeSingularStringField(value: &_storage._represIsin) }()
+        case 14: try { try decoder.decodeSingularMessageField(value: &_storage._issueSizePlan) }()
+        case 15: try { try decoder.decodeSingularMessageField(value: &_storage._totalFloat) }()
+        default: break
+        }
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      if _storage._type != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._type, fieldNumber: 1)
+      }
+      try { if let v = _storage._issueSize {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      } }()
+      try { if let v = _storage._nominal {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      } }()
+      if !_storage._nominalCurrency.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._nominalCurrency, fieldNumber: 4)
+      }
+      if !_storage._primaryIndex.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._primaryIndex, fieldNumber: 5)
+      }
+      try { if let v = _storage._dividendRate {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      } }()
+      if !_storage._preferredShareType.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._preferredShareType, fieldNumber: 7)
+      }
+      try { if let v = _storage._ipoDate {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+      } }()
+      try { if let v = _storage._registryDate {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+      } }()
+      if _storage._divYieldFlag != false {
+        try visitor.visitSingularBoolField(value: _storage._divYieldFlag, fieldNumber: 10)
+      }
+      if !_storage._issueKind.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._issueKind, fieldNumber: 11)
+      }
+      try { if let v = _storage._placementDate {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
+      } }()
+      if !_storage._represIsin.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._represIsin, fieldNumber: 13)
+      }
+      try { if let v = _storage._issueSizePlan {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 14)
+      } }()
+      try { if let v = _storage._totalFloat {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
+      } }()
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: AssetShare, rhs: AssetShare) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._type != rhs_storage._type {return false}
+        if _storage._issueSize != rhs_storage._issueSize {return false}
+        if _storage._nominal != rhs_storage._nominal {return false}
+        if _storage._nominalCurrency != rhs_storage._nominalCurrency {return false}
+        if _storage._primaryIndex != rhs_storage._primaryIndex {return false}
+        if _storage._dividendRate != rhs_storage._dividendRate {return false}
+        if _storage._preferredShareType != rhs_storage._preferredShareType {return false}
+        if _storage._ipoDate != rhs_storage._ipoDate {return false}
+        if _storage._registryDate != rhs_storage._registryDate {return false}
+        if _storage._divYieldFlag != rhs_storage._divYieldFlag {return false}
+        if _storage._issueKind != rhs_storage._issueKind {return false}
+        if _storage._placementDate != rhs_storage._placementDate {return false}
+        if _storage._represIsin != rhs_storage._represIsin {return false}
+        if _storage._issueSizePlan != rhs_storage._issueSizePlan {return false}
+        if _storage._totalFloat != rhs_storage._totalFloat {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AssetBond: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssetBond"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "current_nominal"),
+    2: .standard(proto: "borrow_name"),
+    3: .standard(proto: "issue_size"),
+    4: .same(proto: "nominal"),
+    5: .standard(proto: "nominal_currency"),
+    6: .standard(proto: "issue_kind"),
+    7: .standard(proto: "interest_kind"),
+    8: .standard(proto: "coupon_quantity_per_year"),
+    9: .standard(proto: "indexed_nominal_flag"),
+    10: .standard(proto: "subordinated_flag"),
+    11: .standard(proto: "collateral_flag"),
+    12: .standard(proto: "tax_free_flag"),
+    13: .standard(proto: "amortization_flag"),
+    14: .standard(proto: "floating_coupon_flag"),
+    15: .standard(proto: "perpetual_flag"),
+    16: .standard(proto: "maturity_date"),
+    17: .standard(proto: "return_condition"),
+    18: .standard(proto: "state_reg_date"),
+    19: .standard(proto: "placement_date"),
+    20: .standard(proto: "placement_price"),
+    21: .standard(proto: "issue_size_plan"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _currentNominal: Quotation? = nil
+    var _borrowName: String = String()
+    var _issueSize: Quotation? = nil
+    var _nominal: Quotation? = nil
+    var _nominalCurrency: String = String()
+    var _issueKind: String = String()
+    var _interestKind: String = String()
+    var _couponQuantityPerYear: Int32 = 0
+    var _indexedNominalFlag: Bool = false
+    var _subordinatedFlag: Bool = false
+    var _collateralFlag: Bool = false
+    var _taxFreeFlag: Bool = false
+    var _amortizationFlag: Bool = false
+    var _floatingCouponFlag: Bool = false
+    var _perpetualFlag: Bool = false
+    var _maturityDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _returnCondition: String = String()
+    var _stateRegDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _placementDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _placementPrice: Quotation? = nil
+    var _issueSizePlan: Quotation? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _currentNominal = source._currentNominal
+      _borrowName = source._borrowName
+      _issueSize = source._issueSize
+      _nominal = source._nominal
+      _nominalCurrency = source._nominalCurrency
+      _issueKind = source._issueKind
+      _interestKind = source._interestKind
+      _couponQuantityPerYear = source._couponQuantityPerYear
+      _indexedNominalFlag = source._indexedNominalFlag
+      _subordinatedFlag = source._subordinatedFlag
+      _collateralFlag = source._collateralFlag
+      _taxFreeFlag = source._taxFreeFlag
+      _amortizationFlag = source._amortizationFlag
+      _floatingCouponFlag = source._floatingCouponFlag
+      _perpetualFlag = source._perpetualFlag
+      _maturityDate = source._maturityDate
+      _returnCondition = source._returnCondition
+      _stateRegDate = source._stateRegDate
+      _placementDate = source._placementDate
+      _placementPrice = source._placementPrice
+      _issueSizePlan = source._issueSizePlan
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularMessageField(value: &_storage._currentNominal) }()
+        case 2: try { try decoder.decodeSingularStringField(value: &_storage._borrowName) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._issueSize) }()
+        case 4: try { try decoder.decodeSingularMessageField(value: &_storage._nominal) }()
+        case 5: try { try decoder.decodeSingularStringField(value: &_storage._nominalCurrency) }()
+        case 6: try { try decoder.decodeSingularStringField(value: &_storage._issueKind) }()
+        case 7: try { try decoder.decodeSingularStringField(value: &_storage._interestKind) }()
+        case 8: try { try decoder.decodeSingularInt32Field(value: &_storage._couponQuantityPerYear) }()
+        case 9: try { try decoder.decodeSingularBoolField(value: &_storage._indexedNominalFlag) }()
+        case 10: try { try decoder.decodeSingularBoolField(value: &_storage._subordinatedFlag) }()
+        case 11: try { try decoder.decodeSingularBoolField(value: &_storage._collateralFlag) }()
+        case 12: try { try decoder.decodeSingularBoolField(value: &_storage._taxFreeFlag) }()
+        case 13: try { try decoder.decodeSingularBoolField(value: &_storage._amortizationFlag) }()
+        case 14: try { try decoder.decodeSingularBoolField(value: &_storage._floatingCouponFlag) }()
+        case 15: try { try decoder.decodeSingularBoolField(value: &_storage._perpetualFlag) }()
+        case 16: try { try decoder.decodeSingularMessageField(value: &_storage._maturityDate) }()
+        case 17: try { try decoder.decodeSingularStringField(value: &_storage._returnCondition) }()
+        case 18: try { try decoder.decodeSingularMessageField(value: &_storage._stateRegDate) }()
+        case 19: try { try decoder.decodeSingularMessageField(value: &_storage._placementDate) }()
+        case 20: try { try decoder.decodeSingularMessageField(value: &_storage._placementPrice) }()
+        case 21: try { try decoder.decodeSingularMessageField(value: &_storage._issueSizePlan) }()
+        default: break
+        }
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      try { if let v = _storage._currentNominal {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      } }()
+      if !_storage._borrowName.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._borrowName, fieldNumber: 2)
+      }
+      try { if let v = _storage._issueSize {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      } }()
+      try { if let v = _storage._nominal {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      } }()
+      if !_storage._nominalCurrency.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._nominalCurrency, fieldNumber: 5)
+      }
+      if !_storage._issueKind.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._issueKind, fieldNumber: 6)
+      }
+      if !_storage._interestKind.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._interestKind, fieldNumber: 7)
+      }
+      if _storage._couponQuantityPerYear != 0 {
+        try visitor.visitSingularInt32Field(value: _storage._couponQuantityPerYear, fieldNumber: 8)
+      }
+      if _storage._indexedNominalFlag != false {
+        try visitor.visitSingularBoolField(value: _storage._indexedNominalFlag, fieldNumber: 9)
+      }
+      if _storage._subordinatedFlag != false {
+        try visitor.visitSingularBoolField(value: _storage._subordinatedFlag, fieldNumber: 10)
+      }
+      if _storage._collateralFlag != false {
+        try visitor.visitSingularBoolField(value: _storage._collateralFlag, fieldNumber: 11)
+      }
+      if _storage._taxFreeFlag != false {
+        try visitor.visitSingularBoolField(value: _storage._taxFreeFlag, fieldNumber: 12)
+      }
+      if _storage._amortizationFlag != false {
+        try visitor.visitSingularBoolField(value: _storage._amortizationFlag, fieldNumber: 13)
+      }
+      if _storage._floatingCouponFlag != false {
+        try visitor.visitSingularBoolField(value: _storage._floatingCouponFlag, fieldNumber: 14)
+      }
+      if _storage._perpetualFlag != false {
+        try visitor.visitSingularBoolField(value: _storage._perpetualFlag, fieldNumber: 15)
+      }
+      try { if let v = _storage._maturityDate {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 16)
+      } }()
+      if !_storage._returnCondition.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._returnCondition, fieldNumber: 17)
+      }
+      try { if let v = _storage._stateRegDate {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 18)
+      } }()
+      try { if let v = _storage._placementDate {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 19)
+      } }()
+      try { if let v = _storage._placementPrice {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 20)
+      } }()
+      try { if let v = _storage._issueSizePlan {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 21)
+      } }()
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: AssetBond, rhs: AssetBond) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._currentNominal != rhs_storage._currentNominal {return false}
+        if _storage._borrowName != rhs_storage._borrowName {return false}
+        if _storage._issueSize != rhs_storage._issueSize {return false}
+        if _storage._nominal != rhs_storage._nominal {return false}
+        if _storage._nominalCurrency != rhs_storage._nominalCurrency {return false}
+        if _storage._issueKind != rhs_storage._issueKind {return false}
+        if _storage._interestKind != rhs_storage._interestKind {return false}
+        if _storage._couponQuantityPerYear != rhs_storage._couponQuantityPerYear {return false}
+        if _storage._indexedNominalFlag != rhs_storage._indexedNominalFlag {return false}
+        if _storage._subordinatedFlag != rhs_storage._subordinatedFlag {return false}
+        if _storage._collateralFlag != rhs_storage._collateralFlag {return false}
+        if _storage._taxFreeFlag != rhs_storage._taxFreeFlag {return false}
+        if _storage._amortizationFlag != rhs_storage._amortizationFlag {return false}
+        if _storage._floatingCouponFlag != rhs_storage._floatingCouponFlag {return false}
+        if _storage._perpetualFlag != rhs_storage._perpetualFlag {return false}
+        if _storage._maturityDate != rhs_storage._maturityDate {return false}
+        if _storage._returnCondition != rhs_storage._returnCondition {return false}
+        if _storage._stateRegDate != rhs_storage._stateRegDate {return false}
+        if _storage._placementDate != rhs_storage._placementDate {return false}
+        if _storage._placementPrice != rhs_storage._placementPrice {return false}
+        if _storage._issueSizePlan != rhs_storage._issueSizePlan {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AssetStructuredProduct: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssetStructuredProduct"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "borrow_name"),
+    2: .same(proto: "nominal"),
+    3: .standard(proto: "nominal_currency"),
+    4: .same(proto: "type"),
+    5: .standard(proto: "logic_portfolio"),
+    6: .standard(proto: "asset_type"),
+    7: .standard(proto: "basic_asset"),
+    8: .standard(proto: "safety_barrier"),
+    9: .standard(proto: "maturity_date"),
+    10: .standard(proto: "issue_size_plan"),
+    11: .standard(proto: "issue_size"),
+    12: .standard(proto: "placement_date"),
+    13: .standard(proto: "issue_kind"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _borrowName: String = String()
+    var _nominal: Quotation? = nil
+    var _nominalCurrency: String = String()
+    var _type: StructuredProductType = .spTypeUnspecified
+    var _logicPortfolio: String = String()
+    var _assetType: AssetType = .unspecified
+    var _basicAsset: String = String()
+    var _safetyBarrier: Quotation? = nil
+    var _maturityDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _issueSizePlan: Quotation? = nil
+    var _issueSize: Quotation? = nil
+    var _placementDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _issueKind: String = String()
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _borrowName = source._borrowName
+      _nominal = source._nominal
+      _nominalCurrency = source._nominalCurrency
+      _type = source._type
+      _logicPortfolio = source._logicPortfolio
+      _assetType = source._assetType
+      _basicAsset = source._basicAsset
+      _safetyBarrier = source._safetyBarrier
+      _maturityDate = source._maturityDate
+      _issueSizePlan = source._issueSizePlan
+      _issueSize = source._issueSize
+      _placementDate = source._placementDate
+      _issueKind = source._issueKind
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularStringField(value: &_storage._borrowName) }()
+        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._nominal) }()
+        case 3: try { try decoder.decodeSingularStringField(value: &_storage._nominalCurrency) }()
+        case 4: try { try decoder.decodeSingularEnumField(value: &_storage._type) }()
+        case 5: try { try decoder.decodeSingularStringField(value: &_storage._logicPortfolio) }()
+        case 6: try { try decoder.decodeSingularEnumField(value: &_storage._assetType) }()
+        case 7: try { try decoder.decodeSingularStringField(value: &_storage._basicAsset) }()
+        case 8: try { try decoder.decodeSingularMessageField(value: &_storage._safetyBarrier) }()
+        case 9: try { try decoder.decodeSingularMessageField(value: &_storage._maturityDate) }()
+        case 10: try { try decoder.decodeSingularMessageField(value: &_storage._issueSizePlan) }()
+        case 11: try { try decoder.decodeSingularMessageField(value: &_storage._issueSize) }()
+        case 12: try { try decoder.decodeSingularMessageField(value: &_storage._placementDate) }()
+        case 13: try { try decoder.decodeSingularStringField(value: &_storage._issueKind) }()
+        default: break
+        }
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      if !_storage._borrowName.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._borrowName, fieldNumber: 1)
+      }
+      try { if let v = _storage._nominal {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      } }()
+      if !_storage._nominalCurrency.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._nominalCurrency, fieldNumber: 3)
+      }
+      if _storage._type != .spTypeUnspecified {
+        try visitor.visitSingularEnumField(value: _storage._type, fieldNumber: 4)
+      }
+      if !_storage._logicPortfolio.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._logicPortfolio, fieldNumber: 5)
+      }
+      if _storage._assetType != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._assetType, fieldNumber: 6)
+      }
+      if !_storage._basicAsset.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._basicAsset, fieldNumber: 7)
+      }
+      try { if let v = _storage._safetyBarrier {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+      } }()
+      try { if let v = _storage._maturityDate {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+      } }()
+      try { if let v = _storage._issueSizePlan {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 10)
+      } }()
+      try { if let v = _storage._issueSize {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
+      } }()
+      try { if let v = _storage._placementDate {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 12)
+      } }()
+      if !_storage._issueKind.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._issueKind, fieldNumber: 13)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: AssetStructuredProduct, rhs: AssetStructuredProduct) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._borrowName != rhs_storage._borrowName {return false}
+        if _storage._nominal != rhs_storage._nominal {return false}
+        if _storage._nominalCurrency != rhs_storage._nominalCurrency {return false}
+        if _storage._type != rhs_storage._type {return false}
+        if _storage._logicPortfolio != rhs_storage._logicPortfolio {return false}
+        if _storage._assetType != rhs_storage._assetType {return false}
+        if _storage._basicAsset != rhs_storage._basicAsset {return false}
+        if _storage._safetyBarrier != rhs_storage._safetyBarrier {return false}
+        if _storage._maturityDate != rhs_storage._maturityDate {return false}
+        if _storage._issueSizePlan != rhs_storage._issueSizePlan {return false}
+        if _storage._issueSize != rhs_storage._issueSize {return false}
+        if _storage._placementDate != rhs_storage._placementDate {return false}
+        if _storage._issueKind != rhs_storage._issueKind {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AssetEtf: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssetEtf"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "total_expense"),
+    2: .standard(proto: "hurdle_rate"),
+    3: .standard(proto: "performance_fee"),
+    4: .standard(proto: "fixed_commission"),
+    5: .standard(proto: "payment_type"),
+    6: .standard(proto: "watermark_flag"),
+    7: .standard(proto: "buy_premium"),
+    8: .standard(proto: "sell_discount"),
+    9: .standard(proto: "rebalancing_flag"),
+    10: .standard(proto: "rebalancing_freq"),
+    11: .standard(proto: "management_type"),
+    12: .standard(proto: "primary_index"),
+    13: .standard(proto: "focus_type"),
+    14: .standard(proto: "leveraged_flag"),
+    15: .standard(proto: "num_share"),
+    16: .standard(proto: "ucits_flag"),
+    17: .standard(proto: "released_date"),
+    18: .same(proto: "description"),
+    19: .standard(proto: "primary_index_description"),
+    20: .standard(proto: "primary_index_company"),
+    21: .standard(proto: "index_recovery_period"),
+    22: .standard(proto: "inav_code"),
+    23: .standard(proto: "div_yield_flag"),
+    24: .standard(proto: "expense_commission"),
+    25: .standard(proto: "primary_index_tracking_error"),
+    26: .standard(proto: "rebalancing_plan"),
+    27: .standard(proto: "tax_rate"),
+    28: .standard(proto: "rebalancing_dates"),
+    29: .standard(proto: "issue_kind"),
+    30: .same(proto: "nominal"),
+    31: .standard(proto: "nominal_currency"),
+  ]
+
+  fileprivate class _StorageClass {
+    var _totalExpense: Quotation? = nil
+    var _hurdleRate: Quotation? = nil
+    var _performanceFee: Quotation? = nil
+    var _fixedCommission: Quotation? = nil
+    var _paymentType: String = String()
+    var _watermarkFlag: Bool = false
+    var _buyPremium: Quotation? = nil
+    var _sellDiscount: Quotation? = nil
+    var _rebalancingFlag: Bool = false
+    var _rebalancingFreq: String = String()
+    var _managementType: String = String()
+    var _primaryIndex: String = String()
+    var _focusType: String = String()
+    var _leveragedFlag: Bool = false
+    var _numShare: Quotation? = nil
+    var _ucitsFlag: Bool = false
+    var _releasedDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _description_p: String = String()
+    var _primaryIndexDescription: String = String()
+    var _primaryIndexCompany: String = String()
+    var _indexRecoveryPeriod: Quotation? = nil
+    var _inavCode: String = String()
+    var _divYieldFlag: Bool = false
+    var _expenseCommission: Quotation? = nil
+    var _primaryIndexTrackingError: Quotation? = nil
+    var _rebalancingPlan: String = String()
+    var _taxRate: String = String()
+    var _rebalancingDates: [SwiftProtobuf.Google_Protobuf_Timestamp] = []
+    var _issueKind: String = String()
+    var _nominal: Quotation? = nil
+    var _nominalCurrency: String = String()
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _totalExpense = source._totalExpense
+      _hurdleRate = source._hurdleRate
+      _performanceFee = source._performanceFee
+      _fixedCommission = source._fixedCommission
+      _paymentType = source._paymentType
+      _watermarkFlag = source._watermarkFlag
+      _buyPremium = source._buyPremium
+      _sellDiscount = source._sellDiscount
+      _rebalancingFlag = source._rebalancingFlag
+      _rebalancingFreq = source._rebalancingFreq
+      _managementType = source._managementType
+      _primaryIndex = source._primaryIndex
+      _focusType = source._focusType
+      _leveragedFlag = source._leveragedFlag
+      _numShare = source._numShare
+      _ucitsFlag = source._ucitsFlag
+      _releasedDate = source._releasedDate
+      _description_p = source._description_p
+      _primaryIndexDescription = source._primaryIndexDescription
+      _primaryIndexCompany = source._primaryIndexCompany
+      _indexRecoveryPeriod = source._indexRecoveryPeriod
+      _inavCode = source._inavCode
+      _divYieldFlag = source._divYieldFlag
+      _expenseCommission = source._expenseCommission
+      _primaryIndexTrackingError = source._primaryIndexTrackingError
+      _rebalancingPlan = source._rebalancingPlan
+      _taxRate = source._taxRate
+      _rebalancingDates = source._rebalancingDates
+      _issueKind = source._issueKind
+      _nominal = source._nominal
+      _nominalCurrency = source._nominalCurrency
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularMessageField(value: &_storage._totalExpense) }()
+        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._hurdleRate) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._performanceFee) }()
+        case 4: try { try decoder.decodeSingularMessageField(value: &_storage._fixedCommission) }()
+        case 5: try { try decoder.decodeSingularStringField(value: &_storage._paymentType) }()
+        case 6: try { try decoder.decodeSingularBoolField(value: &_storage._watermarkFlag) }()
+        case 7: try { try decoder.decodeSingularMessageField(value: &_storage._buyPremium) }()
+        case 8: try { try decoder.decodeSingularMessageField(value: &_storage._sellDiscount) }()
+        case 9: try { try decoder.decodeSingularBoolField(value: &_storage._rebalancingFlag) }()
+        case 10: try { try decoder.decodeSingularStringField(value: &_storage._rebalancingFreq) }()
+        case 11: try { try decoder.decodeSingularStringField(value: &_storage._managementType) }()
+        case 12: try { try decoder.decodeSingularStringField(value: &_storage._primaryIndex) }()
+        case 13: try { try decoder.decodeSingularStringField(value: &_storage._focusType) }()
+        case 14: try { try decoder.decodeSingularBoolField(value: &_storage._leveragedFlag) }()
+        case 15: try { try decoder.decodeSingularMessageField(value: &_storage._numShare) }()
+        case 16: try { try decoder.decodeSingularBoolField(value: &_storage._ucitsFlag) }()
+        case 17: try { try decoder.decodeSingularMessageField(value: &_storage._releasedDate) }()
+        case 18: try { try decoder.decodeSingularStringField(value: &_storage._description_p) }()
+        case 19: try { try decoder.decodeSingularStringField(value: &_storage._primaryIndexDescription) }()
+        case 20: try { try decoder.decodeSingularStringField(value: &_storage._primaryIndexCompany) }()
+        case 21: try { try decoder.decodeSingularMessageField(value: &_storage._indexRecoveryPeriod) }()
+        case 22: try { try decoder.decodeSingularStringField(value: &_storage._inavCode) }()
+        case 23: try { try decoder.decodeSingularBoolField(value: &_storage._divYieldFlag) }()
+        case 24: try { try decoder.decodeSingularMessageField(value: &_storage._expenseCommission) }()
+        case 25: try { try decoder.decodeSingularMessageField(value: &_storage._primaryIndexTrackingError) }()
+        case 26: try { try decoder.decodeSingularStringField(value: &_storage._rebalancingPlan) }()
+        case 27: try { try decoder.decodeSingularStringField(value: &_storage._taxRate) }()
+        case 28: try { try decoder.decodeRepeatedMessageField(value: &_storage._rebalancingDates) }()
+        case 29: try { try decoder.decodeSingularStringField(value: &_storage._issueKind) }()
+        case 30: try { try decoder.decodeSingularMessageField(value: &_storage._nominal) }()
+        case 31: try { try decoder.decodeSingularStringField(value: &_storage._nominalCurrency) }()
+        default: break
+        }
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every if/case branch local when no optimizations
+      // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+      // https://github.com/apple/swift-protobuf/issues/1182
+      try { if let v = _storage._totalExpense {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+      } }()
+      try { if let v = _storage._hurdleRate {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      } }()
+      try { if let v = _storage._performanceFee {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      } }()
+      try { if let v = _storage._fixedCommission {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      } }()
+      if !_storage._paymentType.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._paymentType, fieldNumber: 5)
+      }
+      if _storage._watermarkFlag != false {
+        try visitor.visitSingularBoolField(value: _storage._watermarkFlag, fieldNumber: 6)
+      }
+      try { if let v = _storage._buyPremium {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      } }()
+      try { if let v = _storage._sellDiscount {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+      } }()
+      if _storage._rebalancingFlag != false {
+        try visitor.visitSingularBoolField(value: _storage._rebalancingFlag, fieldNumber: 9)
+      }
+      if !_storage._rebalancingFreq.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._rebalancingFreq, fieldNumber: 10)
+      }
+      if !_storage._managementType.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._managementType, fieldNumber: 11)
+      }
+      if !_storage._primaryIndex.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._primaryIndex, fieldNumber: 12)
+      }
+      if !_storage._focusType.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._focusType, fieldNumber: 13)
+      }
+      if _storage._leveragedFlag != false {
+        try visitor.visitSingularBoolField(value: _storage._leveragedFlag, fieldNumber: 14)
+      }
+      try { if let v = _storage._numShare {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 15)
+      } }()
+      if _storage._ucitsFlag != false {
+        try visitor.visitSingularBoolField(value: _storage._ucitsFlag, fieldNumber: 16)
+      }
+      try { if let v = _storage._releasedDate {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 17)
+      } }()
+      if !_storage._description_p.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._description_p, fieldNumber: 18)
+      }
+      if !_storage._primaryIndexDescription.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._primaryIndexDescription, fieldNumber: 19)
+      }
+      if !_storage._primaryIndexCompany.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._primaryIndexCompany, fieldNumber: 20)
+      }
+      try { if let v = _storage._indexRecoveryPeriod {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 21)
+      } }()
+      if !_storage._inavCode.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._inavCode, fieldNumber: 22)
+      }
+      if _storage._divYieldFlag != false {
+        try visitor.visitSingularBoolField(value: _storage._divYieldFlag, fieldNumber: 23)
+      }
+      try { if let v = _storage._expenseCommission {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 24)
+      } }()
+      try { if let v = _storage._primaryIndexTrackingError {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 25)
+      } }()
+      if !_storage._rebalancingPlan.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._rebalancingPlan, fieldNumber: 26)
+      }
+      if !_storage._taxRate.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._taxRate, fieldNumber: 27)
+      }
+      if !_storage._rebalancingDates.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._rebalancingDates, fieldNumber: 28)
+      }
+      if !_storage._issueKind.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._issueKind, fieldNumber: 29)
+      }
+      try { if let v = _storage._nominal {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 30)
+      } }()
+      if !_storage._nominalCurrency.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._nominalCurrency, fieldNumber: 31)
+      }
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: AssetEtf, rhs: AssetEtf) -> Bool {
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._totalExpense != rhs_storage._totalExpense {return false}
+        if _storage._hurdleRate != rhs_storage._hurdleRate {return false}
+        if _storage._performanceFee != rhs_storage._performanceFee {return false}
+        if _storage._fixedCommission != rhs_storage._fixedCommission {return false}
+        if _storage._paymentType != rhs_storage._paymentType {return false}
+        if _storage._watermarkFlag != rhs_storage._watermarkFlag {return false}
+        if _storage._buyPremium != rhs_storage._buyPremium {return false}
+        if _storage._sellDiscount != rhs_storage._sellDiscount {return false}
+        if _storage._rebalancingFlag != rhs_storage._rebalancingFlag {return false}
+        if _storage._rebalancingFreq != rhs_storage._rebalancingFreq {return false}
+        if _storage._managementType != rhs_storage._managementType {return false}
+        if _storage._primaryIndex != rhs_storage._primaryIndex {return false}
+        if _storage._focusType != rhs_storage._focusType {return false}
+        if _storage._leveragedFlag != rhs_storage._leveragedFlag {return false}
+        if _storage._numShare != rhs_storage._numShare {return false}
+        if _storage._ucitsFlag != rhs_storage._ucitsFlag {return false}
+        if _storage._releasedDate != rhs_storage._releasedDate {return false}
+        if _storage._description_p != rhs_storage._description_p {return false}
+        if _storage._primaryIndexDescription != rhs_storage._primaryIndexDescription {return false}
+        if _storage._primaryIndexCompany != rhs_storage._primaryIndexCompany {return false}
+        if _storage._indexRecoveryPeriod != rhs_storage._indexRecoveryPeriod {return false}
+        if _storage._inavCode != rhs_storage._inavCode {return false}
+        if _storage._divYieldFlag != rhs_storage._divYieldFlag {return false}
+        if _storage._expenseCommission != rhs_storage._expenseCommission {return false}
+        if _storage._primaryIndexTrackingError != rhs_storage._primaryIndexTrackingError {return false}
+        if _storage._rebalancingPlan != rhs_storage._rebalancingPlan {return false}
+        if _storage._taxRate != rhs_storage._taxRate {return false}
+        if _storage._rebalancingDates != rhs_storage._rebalancingDates {return false}
+        if _storage._issueKind != rhs_storage._issueKind {return false}
+        if _storage._nominal != rhs_storage._nominal {return false}
+        if _storage._nominalCurrency != rhs_storage._nominalCurrency {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AssetClearingCertificate: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssetClearingCertificate"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "nominal"),
+    2: .standard(proto: "nominal_currency"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._nominal) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.nominalCurrency) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    // The use of inline closures is to circumvent an issue where the compiler
+    // allocates stack space for every if/case branch local when no optimizations
+    // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
+    // https://github.com/apple/swift-protobuf/issues/1182
+    try { if let v = self._nominal {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    } }()
+    if !self.nominalCurrency.isEmpty {
+      try visitor.visitSingularStringField(value: self.nominalCurrency, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: AssetClearingCertificate, rhs: AssetClearingCertificate) -> Bool {
+    if lhs._nominal != rhs._nominal {return false}
+    if lhs.nominalCurrency != rhs.nominalCurrency {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Brand: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".Brand"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "uid"),
+    2: .same(proto: "name"),
+    3: .same(proto: "description"),
+    4: .same(proto: "info"),
+    5: .same(proto: "company"),
+    6: .same(proto: "sector"),
+    7: .standard(proto: "country_of_risk"),
+    8: .standard(proto: "country_of_risk_name"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.uid) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.name) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.description_p) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.info) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.company) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.sector) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.countryOfRisk) }()
+      case 8: try { try decoder.decodeSingularStringField(value: &self.countryOfRiskName) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.uid.isEmpty {
+      try visitor.visitSingularStringField(value: self.uid, fieldNumber: 1)
+    }
+    if !self.name.isEmpty {
+      try visitor.visitSingularStringField(value: self.name, fieldNumber: 2)
+    }
+    if !self.description_p.isEmpty {
+      try visitor.visitSingularStringField(value: self.description_p, fieldNumber: 3)
+    }
+    if !self.info.isEmpty {
+      try visitor.visitSingularStringField(value: self.info, fieldNumber: 4)
+    }
+    if !self.company.isEmpty {
+      try visitor.visitSingularStringField(value: self.company, fieldNumber: 5)
+    }
+    if !self.sector.isEmpty {
+      try visitor.visitSingularStringField(value: self.sector, fieldNumber: 6)
+    }
+    if !self.countryOfRisk.isEmpty {
+      try visitor.visitSingularStringField(value: self.countryOfRisk, fieldNumber: 7)
+    }
+    if !self.countryOfRiskName.isEmpty {
+      try visitor.visitSingularStringField(value: self.countryOfRiskName, fieldNumber: 8)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: Brand, rhs: Brand) -> Bool {
+    if lhs.uid != rhs.uid {return false}
+    if lhs.name != rhs.name {return false}
+    if lhs.description_p != rhs.description_p {return false}
+    if lhs.info != rhs.info {return false}
+    if lhs.company != rhs.company {return false}
+    if lhs.sector != rhs.sector {return false}
+    if lhs.countryOfRisk != rhs.countryOfRisk {return false}
+    if lhs.countryOfRiskName != rhs.countryOfRiskName {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension AssetInstrument: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".AssetInstrument"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "uid"),
+    2: .same(proto: "figi"),
+    3: .standard(proto: "instrument_type"),
+    4: .same(proto: "ticker"),
+    5: .standard(proto: "class_code"),
+    6: .same(proto: "links"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.uid) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.figi) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.instrumentType) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.ticker) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.classCode) }()
+      case 6: try { try decoder.decodeRepeatedMessageField(value: &self.links) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.uid.isEmpty {
+      try visitor.visitSingularStringField(value: self.uid, fieldNumber: 1)
+    }
+    if !self.figi.isEmpty {
+      try visitor.visitSingularStringField(value: self.figi, fieldNumber: 2)
+    }
+    if !self.instrumentType.isEmpty {
+      try visitor.visitSingularStringField(value: self.instrumentType, fieldNumber: 3)
+    }
+    if !self.ticker.isEmpty {
+      try visitor.visitSingularStringField(value: self.ticker, fieldNumber: 4)
+    }
+    if !self.classCode.isEmpty {
+      try visitor.visitSingularStringField(value: self.classCode, fieldNumber: 5)
+    }
+    if !self.links.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.links, fieldNumber: 6)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: AssetInstrument, rhs: AssetInstrument) -> Bool {
+    if lhs.uid != rhs.uid {return false}
+    if lhs.figi != rhs.figi {return false}
+    if lhs.instrumentType != rhs.instrumentType {return false}
+    if lhs.ticker != rhs.ticker {return false}
+    if lhs.classCode != rhs.classCode {return false}
+    if lhs.links != rhs.links {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension InstrumentLink: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".InstrumentLink"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "type"),
+    2: .standard(proto: "instrument_uid"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.type) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.instrumentUid) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.type.isEmpty {
+      try visitor.visitSingularStringField(value: self.type, fieldNumber: 1)
+    }
+    if !self.instrumentUid.isEmpty {
+      try visitor.visitSingularStringField(value: self.instrumentUid, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: InstrumentLink, rhs: InstrumentLink) -> Bool {
+    if lhs.type != rhs.type {return false}
+    if lhs.instrumentUid != rhs.instrumentUid {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension GetFavoritesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetFavoritesRequest"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: GetFavoritesRequest, rhs: GetFavoritesRequest) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension GetFavoritesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".GetFavoritesResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "favorite_instruments"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.favoriteInstruments) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.favoriteInstruments.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.favoriteInstruments, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: GetFavoritesResponse, rhs: GetFavoritesResponse) -> Bool {
+    if lhs.favoriteInstruments != rhs.favoriteInstruments {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension FavoriteInstrument: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".FavoriteInstrument"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "figi"),
+    2: .same(proto: "ticker"),
+    3: .standard(proto: "class_code"),
+    4: .same(proto: "isin"),
+    11: .standard(proto: "instrument_type"),
+    16: .standard(proto: "otc_flag"),
+    17: .standard(proto: "api_trade_available_flag"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.figi) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.ticker) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.classCode) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.isin) }()
+      case 11: try { try decoder.decodeSingularStringField(value: &self.instrumentType) }()
+      case 16: try { try decoder.decodeSingularBoolField(value: &self.otcFlag) }()
+      case 17: try { try decoder.decodeSingularBoolField(value: &self.apiTradeAvailableFlag) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.figi.isEmpty {
+      try visitor.visitSingularStringField(value: self.figi, fieldNumber: 1)
+    }
+    if !self.ticker.isEmpty {
+      try visitor.visitSingularStringField(value: self.ticker, fieldNumber: 2)
+    }
+    if !self.classCode.isEmpty {
+      try visitor.visitSingularStringField(value: self.classCode, fieldNumber: 3)
+    }
+    if !self.isin.isEmpty {
+      try visitor.visitSingularStringField(value: self.isin, fieldNumber: 4)
+    }
+    if !self.instrumentType.isEmpty {
+      try visitor.visitSingularStringField(value: self.instrumentType, fieldNumber: 11)
+    }
+    if self.otcFlag != false {
+      try visitor.visitSingularBoolField(value: self.otcFlag, fieldNumber: 16)
+    }
+    if self.apiTradeAvailableFlag != false {
+      try visitor.visitSingularBoolField(value: self.apiTradeAvailableFlag, fieldNumber: 17)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: FavoriteInstrument, rhs: FavoriteInstrument) -> Bool {
+    if lhs.figi != rhs.figi {return false}
+    if lhs.ticker != rhs.ticker {return false}
+    if lhs.classCode != rhs.classCode {return false}
+    if lhs.isin != rhs.isin {return false}
+    if lhs.instrumentType != rhs.instrumentType {return false}
+    if lhs.otcFlag != rhs.otcFlag {return false}
+    if lhs.apiTradeAvailableFlag != rhs.apiTradeAvailableFlag {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension EditFavoritesRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".EditFavoritesRequest"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "instruments"),
+    6: .standard(proto: "action_type"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.instruments) }()
+      case 6: try { try decoder.decodeSingularEnumField(value: &self.actionType) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.instruments.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.instruments, fieldNumber: 1)
+    }
+    if self.actionType != .unspecified {
+      try visitor.visitSingularEnumField(value: self.actionType, fieldNumber: 6)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: EditFavoritesRequest, rhs: EditFavoritesRequest) -> Bool {
+    if lhs.instruments != rhs.instruments {return false}
+    if lhs.actionType != rhs.actionType {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension EditFavoritesRequestInstrument: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".EditFavoritesRequestInstrument"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "figi"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.figi) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.figi.isEmpty {
+      try visitor.visitSingularStringField(value: self.figi, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: EditFavoritesRequestInstrument, rhs: EditFavoritesRequestInstrument) -> Bool {
+    if lhs.figi != rhs.figi {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension EditFavoritesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  public static let protoMessageName: String = _protobuf_package + ".EditFavoritesResponse"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "favorite_instruments"),
+  ]
+
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.favoriteInstruments) }()
+      default: break
+      }
+    }
+  }
+
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.favoriteInstruments.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.favoriteInstruments, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  public static func ==(lhs: EditFavoritesResponse, rhs: EditFavoritesResponse) -> Bool {
+    if lhs.favoriteInstruments != rhs.favoriteInstruments {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

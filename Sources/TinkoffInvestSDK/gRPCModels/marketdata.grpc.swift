@@ -51,6 +51,11 @@ public protocol MarketDataServiceClientProtocol: GRPCClient {
     _ request: GetTradingStatusRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<GetTradingStatusRequest, GetTradingStatusResponse>
+
+  func getLastTrades(
+    _ request: GetLastTradesRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<GetLastTradesRequest, GetLastTradesResponse>
 }
 
 extension MarketDataServiceClientProtocol {
@@ -129,6 +134,24 @@ extension MarketDataServiceClientProtocol {
       interceptors: self.interceptors?.makeGetTradingStatusInterceptors() ?? []
     )
   }
+
+  ///Метод запроса последних обезличенных сделок по инструменту.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetLastTrades.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  public func getLastTrades(
+    _ request: GetLastTradesRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<GetLastTradesRequest, GetLastTradesResponse> {
+    return self.makeUnaryCall(
+      path: "/tinkoff.public.invest.api.contract.v1.MarketDataService/GetLastTrades",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetLastTradesInterceptors() ?? []
+    )
+  }
 }
 
 public protocol MarketDataServiceClientInterceptorFactoryProtocol {
@@ -144,6 +167,9 @@ public protocol MarketDataServiceClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'getTradingStatus'.
   func makeGetTradingStatusInterceptors() -> [ClientInterceptor<GetTradingStatusRequest, GetTradingStatusResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'getLastTrades'.
+  func makeGetLastTradesInterceptors() -> [ClientInterceptor<GetLastTradesRequest, GetLastTradesResponse>]
 }
 
 public final class MarketDataServiceClient: MarketDataServiceClientProtocol {
@@ -251,6 +277,9 @@ public protocol MarketDataServiceProvider: CallHandlerProvider {
 
   ///Метод запроса статуса торгов по инструментам.
   func getTradingStatus(request: GetTradingStatusRequest, context: StatusOnlyCallContext) -> EventLoopFuture<GetTradingStatusResponse>
+
+  ///Метод запроса последних обезличенных сделок по инструменту.
+  func getLastTrades(request: GetLastTradesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<GetLastTradesResponse>
 }
 
 extension MarketDataServiceProvider {
@@ -299,6 +328,15 @@ extension MarketDataServiceProvider {
         userFunction: self.getTradingStatus(request:context:)
       )
 
+    case "GetLastTrades":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<GetLastTradesRequest>(),
+        responseSerializer: ProtobufSerializer<GetLastTradesResponse>(),
+        interceptors: self.interceptors?.makeGetLastTradesInterceptors() ?? [],
+        userFunction: self.getLastTrades(request:context:)
+      )
+
     default:
       return nil
     }
@@ -322,6 +360,10 @@ public protocol MarketDataServiceServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'getTradingStatus'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeGetTradingStatusInterceptors() -> [ServerInterceptor<GetTradingStatusRequest, GetTradingStatusResponse>]
+
+  /// - Returns: Interceptors to use when handling 'getLastTrades'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetLastTradesInterceptors() -> [ServerInterceptor<GetLastTradesRequest, GetLastTradesResponse>]
 }
 /// To build a server, implement a class that conforms to this protocol.
 public protocol MarketDataStreamServiceProvider: CallHandlerProvider {

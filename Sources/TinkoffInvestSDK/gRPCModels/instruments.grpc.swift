@@ -49,6 +49,11 @@ public protocol InstrumentsServiceClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<InstrumentsRequest, BondsResponse>
 
+  func getBondCoupons(
+    _ request: GetBondCouponsRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<GetBondCouponsRequest, GetBondCouponsResponse>
+
   func currencyBy(
     _ request: InstrumentRequest,
     callOptions: CallOptions?
@@ -108,6 +113,26 @@ public protocol InstrumentsServiceClientProtocol: GRPCClient {
     _ request: GetDividendsRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<GetDividendsRequest, GetDividendsResponse>
+
+  func getAssetBy(
+    _ request: AssetRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<AssetRequest, AssetResponse>
+
+  func getAssets(
+    _ request: AssetsRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<AssetsRequest, AssetsResponse>
+
+  func getFavorites(
+    _ request: GetFavoritesRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<GetFavoritesRequest, GetFavoritesResponse>
+
+  func editFavorites(
+    _ request: EditFavoritesRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<EditFavoritesRequest, EditFavoritesResponse>
 }
 
 extension InstrumentsServiceClientProtocol {
@@ -166,6 +191,24 @@ extension InstrumentsServiceClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeBondsInterceptors() ?? []
+    )
+  }
+
+  ///Метод получения графика выплат купонов по облигации
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetBondCoupons.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  public func getBondCoupons(
+    _ request: GetBondCouponsRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<GetBondCouponsRequest, GetBondCouponsResponse> {
+    return self.makeUnaryCall(
+      path: "/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetBondCoupons",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetBondCouponsInterceptors() ?? []
     )
   }
 
@@ -384,6 +427,78 @@ extension InstrumentsServiceClientProtocol {
       interceptors: self.interceptors?.makeGetDividendsInterceptors() ?? []
     )
   }
+
+  ///Метод получения актива по его идентификатору.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetAssetBy.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  public func getAssetBy(
+    _ request: AssetRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<AssetRequest, AssetResponse> {
+    return self.makeUnaryCall(
+      path: "/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAssetBy",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetAssetByInterceptors() ?? []
+    )
+  }
+
+  ///Метод получения списка активов.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetAssets.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  public func getAssets(
+    _ request: AssetsRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<AssetsRequest, AssetsResponse> {
+    return self.makeUnaryCall(
+      path: "/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetAssets",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetAssetsInterceptors() ?? []
+    )
+  }
+
+  ///Метод получения избранных инструментов.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetFavorites.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  public func getFavorites(
+    _ request: GetFavoritesRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<GetFavoritesRequest, GetFavoritesResponse> {
+    return self.makeUnaryCall(
+      path: "/tinkoff.public.invest.api.contract.v1.InstrumentsService/GetFavorites",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetFavoritesInterceptors() ?? []
+    )
+  }
+
+  ///Метод редактирования избранных инструментов.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to EditFavorites.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  public func editFavorites(
+    _ request: EditFavoritesRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<EditFavoritesRequest, EditFavoritesResponse> {
+    return self.makeUnaryCall(
+      path: "/tinkoff.public.invest.api.contract.v1.InstrumentsService/EditFavorites",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeEditFavoritesInterceptors() ?? []
+    )
+  }
 }
 
 public protocol InstrumentsServiceClientInterceptorFactoryProtocol {
@@ -396,6 +511,9 @@ public protocol InstrumentsServiceClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'bonds'.
   func makeBondsInterceptors() -> [ClientInterceptor<InstrumentsRequest, BondsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'getBondCoupons'.
+  func makeGetBondCouponsInterceptors() -> [ClientInterceptor<GetBondCouponsRequest, GetBondCouponsResponse>]
 
   /// - Returns: Interceptors to use when invoking 'currencyBy'.
   func makeCurrencyByInterceptors() -> [ClientInterceptor<InstrumentRequest, CurrencyResponse>]
@@ -432,6 +550,18 @@ public protocol InstrumentsServiceClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'getDividends'.
   func makeGetDividendsInterceptors() -> [ClientInterceptor<GetDividendsRequest, GetDividendsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'getAssetBy'.
+  func makeGetAssetByInterceptors() -> [ClientInterceptor<AssetRequest, AssetResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'getAssets'.
+  func makeGetAssetsInterceptors() -> [ClientInterceptor<AssetsRequest, AssetsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'getFavorites'.
+  func makeGetFavoritesInterceptors() -> [ClientInterceptor<GetFavoritesRequest, GetFavoritesResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'editFavorites'.
+  func makeEditFavoritesInterceptors() -> [ClientInterceptor<EditFavoritesRequest, EditFavoritesResponse>]
 }
 
 public final class InstrumentsServiceClient: InstrumentsServiceClientProtocol {
@@ -473,6 +603,9 @@ public protocol InstrumentsServiceProvider: CallHandlerProvider {
   ///Метод получения списка облигаций.
   func bonds(request: InstrumentsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<BondsResponse>
 
+  ///Метод получения графика выплат купонов по облигации
+  func getBondCoupons(request: GetBondCouponsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<GetBondCouponsResponse>
+
   ///Метод получения валюты по её идентификатору.
   func currencyBy(request: InstrumentRequest, context: StatusOnlyCallContext) -> EventLoopFuture<CurrencyResponse>
 
@@ -508,6 +641,18 @@ public protocol InstrumentsServiceProvider: CallHandlerProvider {
 
   ///Метод для получения событий выплаты дивидендов по инструменту.
   func getDividends(request: GetDividendsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<GetDividendsResponse>
+
+  ///Метод получения актива по его идентификатору.
+  func getAssetBy(request: AssetRequest, context: StatusOnlyCallContext) -> EventLoopFuture<AssetResponse>
+
+  ///Метод получения списка активов.
+  func getAssets(request: AssetsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<AssetsResponse>
+
+  ///Метод получения избранных инструментов.
+  func getFavorites(request: GetFavoritesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<GetFavoritesResponse>
+
+  ///Метод редактирования избранных инструментов.
+  func editFavorites(request: EditFavoritesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<EditFavoritesResponse>
 }
 
 extension InstrumentsServiceProvider {
@@ -545,6 +690,15 @@ extension InstrumentsServiceProvider {
         responseSerializer: ProtobufSerializer<BondsResponse>(),
         interceptors: self.interceptors?.makeBondsInterceptors() ?? [],
         userFunction: self.bonds(request:context:)
+      )
+
+    case "GetBondCoupons":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<GetBondCouponsRequest>(),
+        responseSerializer: ProtobufSerializer<GetBondCouponsResponse>(),
+        interceptors: self.interceptors?.makeGetBondCouponsInterceptors() ?? [],
+        userFunction: self.getBondCoupons(request:context:)
       )
 
     case "CurrencyBy":
@@ -655,6 +809,42 @@ extension InstrumentsServiceProvider {
         userFunction: self.getDividends(request:context:)
       )
 
+    case "GetAssetBy":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<AssetRequest>(),
+        responseSerializer: ProtobufSerializer<AssetResponse>(),
+        interceptors: self.interceptors?.makeGetAssetByInterceptors() ?? [],
+        userFunction: self.getAssetBy(request:context:)
+      )
+
+    case "GetAssets":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<AssetsRequest>(),
+        responseSerializer: ProtobufSerializer<AssetsResponse>(),
+        interceptors: self.interceptors?.makeGetAssetsInterceptors() ?? [],
+        userFunction: self.getAssets(request:context:)
+      )
+
+    case "GetFavorites":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<GetFavoritesRequest>(),
+        responseSerializer: ProtobufSerializer<GetFavoritesResponse>(),
+        interceptors: self.interceptors?.makeGetFavoritesInterceptors() ?? [],
+        userFunction: self.getFavorites(request:context:)
+      )
+
+    case "EditFavorites":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<EditFavoritesRequest>(),
+        responseSerializer: ProtobufSerializer<EditFavoritesResponse>(),
+        interceptors: self.interceptors?.makeEditFavoritesInterceptors() ?? [],
+        userFunction: self.editFavorites(request:context:)
+      )
+
     default:
       return nil
     }
@@ -674,6 +864,10 @@ public protocol InstrumentsServiceServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'bonds'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeBondsInterceptors() -> [ServerInterceptor<InstrumentsRequest, BondsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'getBondCoupons'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetBondCouponsInterceptors() -> [ServerInterceptor<GetBondCouponsRequest, GetBondCouponsResponse>]
 
   /// - Returns: Interceptors to use when handling 'currencyBy'.
   ///   Defaults to calling `self.makeInterceptors()`.
@@ -722,4 +916,20 @@ public protocol InstrumentsServiceServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'getDividends'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeGetDividendsInterceptors() -> [ServerInterceptor<GetDividendsRequest, GetDividendsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'getAssetBy'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetAssetByInterceptors() -> [ServerInterceptor<AssetRequest, AssetResponse>]
+
+  /// - Returns: Interceptors to use when handling 'getAssets'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetAssetsInterceptors() -> [ServerInterceptor<AssetsRequest, AssetsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'getFavorites'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetFavoritesInterceptors() -> [ServerInterceptor<GetFavoritesRequest, GetFavoritesResponse>]
+
+  /// - Returns: Interceptors to use when handling 'editFavorites'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeEditFavoritesInterceptors() -> [ServerInterceptor<EditFavoritesRequest, EditFavoritesResponse>]
 }

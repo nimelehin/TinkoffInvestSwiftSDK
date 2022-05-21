@@ -134,6 +134,63 @@ extension AccountStatus: CaseIterable {
 
 #endif  // swift(>=4.2)
 
+///Уровень доступа к счёту.
+public enum AccessLevel: SwiftProtobuf.Enum {
+  public typealias RawValue = Int
+
+  ///Уровень доступа не определён.
+  case accountAccessLevelUnspecified // = 0
+
+  ///Полный доступ к счёту.
+  case accountAccessLevelFullAccess // = 1
+
+  ///Доступ с уровнем прав "только чтение".
+  case accountAccessLevelReadOnly // = 2
+
+  ///Доступ отсутствует.
+  case accountAccessLevelNoAccess // = 3
+  case UNRECOGNIZED(Int)
+
+  public init() {
+    self = .accountAccessLevelUnspecified
+  }
+
+  public init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .accountAccessLevelUnspecified
+    case 1: self = .accountAccessLevelFullAccess
+    case 2: self = .accountAccessLevelReadOnly
+    case 3: self = .accountAccessLevelNoAccess
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  public var rawValue: Int {
+    switch self {
+    case .accountAccessLevelUnspecified: return 0
+    case .accountAccessLevelFullAccess: return 1
+    case .accountAccessLevelReadOnly: return 2
+    case .accountAccessLevelNoAccess: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+}
+
+#if swift(>=4.2)
+
+extension AccessLevel: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  public static var allCases: [AccessLevel] = [
+    .accountAccessLevelUnspecified,
+    .accountAccessLevelFullAccess,
+    .accountAccessLevelReadOnly,
+    .accountAccessLevelNoAccess,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
 ///Запрос получения счетов пользователя.
 public struct GetAccountsRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -196,6 +253,9 @@ public struct Account {
   public var hasClosedDate: Bool {return self._closedDate != nil}
   /// Clears the value of `closedDate`. Subsequent reads from it will return its default value.
   public mutating func clearClosedDate() {self._closedDate = nil}
+
+  /// Уровень доступа к текущему счёту (определяется токеном).
+  public var accessLevel: AccessLevel = .accountAccessLevelUnspecified
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -371,8 +431,11 @@ public struct GetInfoResponse {
   ///Признак квалифицированного инвестора.
   public var qualStatus: Bool = false
 
-  ///Набор требующих тестирования инструментов и возможностей, с которыми может работать пользователь.
+  ///Набор требующих тестирования инструментов и возможностей, с которыми может работать пользователь. [Подробнее](https://tinkoff.github.io/investAPI/faq_users/).
   public var qualifiedForWorkWith: [String] = []
+
+  ///Наименование тарифа пользователя.
+  public var tariff: String = String()
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -398,6 +461,15 @@ extension AccountStatus: SwiftProtobuf._ProtoNameProviding {
     1: .same(proto: "ACCOUNT_STATUS_NEW"),
     2: .same(proto: "ACCOUNT_STATUS_OPEN"),
     3: .same(proto: "ACCOUNT_STATUS_CLOSED"),
+  ]
+}
+
+extension AccessLevel: SwiftProtobuf._ProtoNameProviding {
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "ACCOUNT_ACCESS_LEVEL_UNSPECIFIED"),
+    1: .same(proto: "ACCOUNT_ACCESS_LEVEL_FULL_ACCESS"),
+    2: .same(proto: "ACCOUNT_ACCESS_LEVEL_READ_ONLY"),
+    3: .same(proto: "ACCOUNT_ACCESS_LEVEL_NO_ACCESS"),
   ]
 }
 
@@ -461,6 +533,7 @@ extension Account: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
     4: .same(proto: "status"),
     5: .standard(proto: "opened_date"),
     6: .standard(proto: "closed_date"),
+    7: .standard(proto: "access_level"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -475,6 +548,7 @@ extension Account: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
       case 4: try { try decoder.decodeSingularEnumField(value: &self.status) }()
       case 5: try { try decoder.decodeSingularMessageField(value: &self._openedDate) }()
       case 6: try { try decoder.decodeSingularMessageField(value: &self._closedDate) }()
+      case 7: try { try decoder.decodeSingularEnumField(value: &self.accessLevel) }()
       default: break
       }
     }
@@ -503,6 +577,9 @@ extension Account: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
     try { if let v = self._closedDate {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
     } }()
+    if self.accessLevel != .accountAccessLevelUnspecified {
+      try visitor.visitSingularEnumField(value: self.accessLevel, fieldNumber: 7)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -513,6 +590,7 @@ extension Account: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBa
     if lhs.status != rhs.status {return false}
     if lhs._openedDate != rhs._openedDate {return false}
     if lhs._closedDate != rhs._closedDate {return false}
+    if lhs.accessLevel != rhs.accessLevel {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -768,6 +846,7 @@ extension GetInfoResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     1: .standard(proto: "prem_status"),
     2: .standard(proto: "qual_status"),
     3: .standard(proto: "qualified_for_work_with"),
+    4: .same(proto: "tariff"),
   ]
 
   public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -779,6 +858,7 @@ extension GetInfoResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
       case 1: try { try decoder.decodeSingularBoolField(value: &self.premStatus) }()
       case 2: try { try decoder.decodeSingularBoolField(value: &self.qualStatus) }()
       case 3: try { try decoder.decodeRepeatedStringField(value: &self.qualifiedForWorkWith) }()
+      case 4: try { try decoder.decodeSingularStringField(value: &self.tariff) }()
       default: break
       }
     }
@@ -794,6 +874,9 @@ extension GetInfoResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     if !self.qualifiedForWorkWith.isEmpty {
       try visitor.visitRepeatedStringField(value: self.qualifiedForWorkWith, fieldNumber: 3)
     }
+    if !self.tariff.isEmpty {
+      try visitor.visitSingularStringField(value: self.tariff, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -801,6 +884,7 @@ extension GetInfoResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplemen
     if lhs.premStatus != rhs.premStatus {return false}
     if lhs.qualStatus != rhs.qualStatus {return false}
     if lhs.qualifiedForWorkWith != rhs.qualifiedForWorkWith {return false}
+    if lhs.tariff != rhs.tariff {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
